@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/pig-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/pig-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="建一个图片上传">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webUploader常用功能">
+<meta property="og:url" content="http://blog.lsiru.com/2019/05/06/webUploader常用功能/index.html">
+<meta property="og:site_name" content="XiaoGuai&#39;s blog">
+<meta property="og:description" content="建一个图片上传">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-09-15T15:05:53.857Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="webUploader常用功能">
+<meta name="twitter:description" content="建一个图片上传">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.lsiru.com/2019/05/06/webUploader常用功能/">
+
+
+
+
+
+  <title>webUploader常用功能 | XiaoGuai's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">XiaoGuai's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.lsiru.com/2019/05/06/webUploader常用功能/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Qiwei Guo">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XiaoGuai's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">webUploader常用功能</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-06T23:14:14+08:00">
+                2019-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="建一个图片上传"><a href="#建一个图片上传" class="headerlink" title="建一个图片上传"></a>建一个图片上传</h1><a id="more"></a>
+<pre><code>var uploader=WebUploader.create({
+    auto:false,        //是否开启选择图片后自动上传,true:开启,false:关闭
+    server:&apos;upload.do&apos;,    //上传接口
+    dnd:&apos;#fileList&apos;,        //指定区域可以将图片拖拽进去，多区域用,隔开
+    paste:document.body, //指定区域通过粘贴添加截屏的图片，建议设置为document.body
+    pick:{
+        id:&apos;#filePicker&apos;,        //选取按钮变为选择图片按钮
+        label:&apos;点击选择图片&apos;,    //按钮文字
+        multiple:true        //是否开启多图选择
+    },
+
+    accept:{                            //指定接收哪些类型文件
+        title:&apos;Images&apos;,                    //文字描述
+        extensions:&apos;gif,jpg,jpeg,bmp,png&apos;,    //允许的文件后缀，不带点，用逗号分开
+        mimeTypes:&apos;image/*&apos;            //？？？
+    },
+
+    thumb:{                    //配置生成缩略图的选项
+        width:100,
+        height:100,
+        qualiity:70,            //图片质量，只有type为image/jpeg的时候才有效
+        allowMagnify:false,        //是否允许放大，生成小图不失真请选择false
+        crop:false,            //是否允许裁剪
+        type:&apos;image/jpeg&apos;        //为空的话保留原有图片格式，否则强制转成指定格式
+    },
+
+    compress:{                    //配置压缩图片的选项，如果为false，则上传前不进行压缩
+        width:1600,                
+        height:1600,
+        quality:50,                //图片压缩质量，只有type为image/jpeg的时候才有效
+        allowMagnify:false,            //是否允许放大，生成小图不失真请选择false
+        crop:false,                //是否允许裁剪
+        preserveHeaders:true,        //是否保留头部meta信息
+        noCompressIfLarger:false,    //如果压缩后文件比原文件大则使用原图，可能影响图片自动纠正
+        compressSize:0            //单位字节，如果图片大小小于此值，不会采取压缩
+    },
+
+    prepareNextFile:true,    //允许文件上传提前把下一个文件准备好，比如需要图片压缩，md5序列化
+    fileVal:file    ,    //设置文件上传域的name,MultipartFile类型去接收
+
+    method:&apos;POST&apos;,    //文件上传方式：POST或者GET
+
+    fileNumLimit:2,    //限定上传数量
+
+    fileSizeLimit:1024*1024,        //限制总大小 1024*1024=1MB,但是这里设定不准确
+
+    fileSingleSizeLimit:1024,        //限制单个文件大小    1024=1KB
+
+})
+</code></pre><hr>
+<h1 id="WebUpLoader事件"><a href="#WebUpLoader事件" class="headerlink" title="WebUpLoader事件"></a>WebUpLoader事件</h1><p><strong>事件详情访问WebUpLoader API。下面举一个例子</strong><br>uploadStart    在某个文件开始上传前触发，一个文件只触发一次。<br><strong>如何调用</strong></p>
+<pre><code>uploader.onUploadStart=function(file){
+    alert(&quot;开始上传&quot;);
+}
+</code></pre><p><strong>或者</strong></p>
+<pre><code>uploader.on(&apos;uploadStart&apos;,function(file){
+    alert(&quot;开始上传啦&quot;);
+});
+</code></pre><hr>
+<h1 id="获取或者设置配置项（option）"><a href="#获取或者设置配置项（option）" class="headerlink" title="获取或者设置配置项（option）"></a>获取或者设置配置项（option）</h1><pre><code>uploader.option(&apos;thumb&apos;,{    //获取缩略图thumb配置
+    crop:true                //此时缩略图被裁剪        长宽设置貌似有优先级
+});
+</code></pre><hr>
+<h1 id="getStats"><a href="#getStats" class="headerlink" title="getStats"></a>getStats</h1><p><strong>获取文件统计信息。返回信息如下：</strong></p>
+<ul>
+<li>successNum        上传成功的文件数</li>
+<li>progressNum    上传中的文件数</li>
+<li>cancelNum        被删除的文件数</li>
+<li>invalidNum        无效的文件数</li>
+<li>uploadFailNum    上传失败的文件数</li>
+<li>queueNum        还在队列中的文件数</li>
+<li>interruptNum    被暂停的文件数</li>
+</ul>
+<p><strong>例子</strong></p>
+<pre><code>uploader.on(&apos;uploadComplete&apos;,function(file){
+    alert(uploader.getStats().successNum);        //上传完成时弹出上传成功的文件数
+});
+</code></pre><hr>
+<h1 id="addButton"><a href="#addButton" class="headerlink" title="addButton"></a>addButton</h1><p><strong>添加文件选择按钮，如果一个按钮不够，需要调用此方法来添加。参数跟 pick一致</strong></p>
+<pre><code>uploader.addButton({
+    id:&quot;#btn&quot;,
+    innerHtml:&apos;选择文件&apos;
+});
+</code></pre><hr>
+<h1 id="makeThumb"><a href="#makeThumb" class="headerlink" title="makeThumb"></a>makeThumb</h1><p><strong>生成缩略图，此过程为异步，所以需要传入callback。通常情况在图片加入队里后调用此方法来生成预览图。</strong><br>makeThumb(file,callback)<br>makeThumb(file,callback,width,height)<br>callback中可以接收两个参数</p>
+<ul>
+<li>error，如果生成缩略图有错误，此error将为真</li>
+<li>ret，缩略图的Data URL值    在IE6/7中不支持</li>
+</ul>
+<p><strong>例子</strong></p>
+<pre><code>uploader.on(&apos;fileQueued&apos;, function(file) {                //文件添加后触发
+    var $li = $(&apos;&lt;div id=&quot;&apos;+file.id+&apos;&quot;class=&quot;file-item thumbnail&quot;&gt;&apos;
+            + &apos;&lt;img&gt;&apos; + &apos;&lt;div class=&quot;info&quot;&gt;&apos; + file.name + &apos;&lt;/div&gt;&apos;
+            + &apos;&lt;/div&gt;&apos;), $img = $li.find(&apos;img&apos;);
+    $(&quot;#fileList&quot;).append($li);
+
+    uploader.makeThumb(file, function(error, src) {                //生成缩略图    
+        if (error) {
+            $(&quot;#fileList&quot;).replaceWith(&apos;&lt;span&gt;不能预览&lt;/span&gt;&apos;);
+            return;
+        }
+        $img.attr(&apos;src&apos;, src);
+    }, 100, 100);
+});
+</code></pre><hr>
+<h1 id="addFiles"><a href="#addFiles" class="headerlink" title="addFiles"></a>addFiles</h1><p><strong>添加文件到队列</strong><br>addFiles(file)<br>addFiles([file1,file2…])</p>
+<hr>
+<h1 id="removeFile"><a href="#removeFile" class="headerlink" title="removeFile"></a>removeFile</h1><p><strong>移除某一文件，默认只会标记文件状态已取消，如果第二个参数为true则会从queue（队列）中移除</strong></p>
+<hr>
+<h1 id="retry"><a href="#retry" class="headerlink" title="retry"></a>retry</h1><p><strong>重试上传，重试指定文件，或者出错的文件重新上传</strong><br>retry()<br>retry(file)</p>
+<hr>
+<h1 id="upload"><a href="#upload" class="headerlink" title="upload"></a>upload</h1><p><strong>开始上传，可以在暂停后调用继续上传</strong><br>upload()<br>upload(file|fileId)</p>
+<hr>
+<h1 id="stop"><a href="#stop" class="headerlink" title="stop"></a>stop</h1><p><strong>暂停上传</strong><br>stop()<br>stop(true)<br>stop(file)</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/06/面试官的初次心得/" rel="next" title="面试官的初次心得">
+                <i class="fa fa-chevron-left"></i> 面试官的初次心得
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/15/源码-ArrayList/" rel="prev" title="源码-ArrayList">
+                源码-ArrayList <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Qiwei Guo</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#建一个图片上传"><span class="nav-number">1.</span> <span class="nav-text">建一个图片上传</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#WebUpLoader事件"><span class="nav-number">2.</span> <span class="nav-text">WebUpLoader事件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#获取或者设置配置项（option）"><span class="nav-number">3.</span> <span class="nav-text">获取或者设置配置项（option）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#getStats"><span class="nav-number">4.</span> <span class="nav-text">getStats</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#addButton"><span class="nav-number">5.</span> <span class="nav-text">addButton</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#makeThumb"><span class="nav-number">6.</span> <span class="nav-text">makeThumb</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#addFiles"><span class="nav-number">7.</span> <span class="nav-text">addFiles</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#removeFile"><span class="nav-number">8.</span> <span class="nav-text">removeFile</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#retry"><span class="nav-number">9.</span> <span class="nav-text">retry</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#upload"><span class="nav-number">10.</span> <span class="nav-text">upload</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#stop"><span class="nav-number">11.</span> <span class="nav-text">stop</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qiwei Guo</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
