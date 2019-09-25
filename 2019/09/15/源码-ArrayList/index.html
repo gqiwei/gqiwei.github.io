@@ -1,308 +1,89 @@
 <!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/pig-32x32.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/pig-16x16.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="Hexo, NexT">
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="集合对于JAVA来说是一个非常基础也非常重要的东西，因为任何数据都需要存储。而ArrayList,在我初入这行业时，只要用到数据第一时间就会想到它。在经历过尽力过几年磨砺之后，ArrayList也不再是我的首选，但并不代表着用不到它，为了更好的运用各种集合，就有必要进行源码的阅读。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="源码-ArrayList">
-<meta property="og:url" content="http://blog.lsiru.com/2019/09/15/源码-ArrayList/index.html">
-<meta property="og:site_name" content="XiaoGuai&#39;s blog">
-<meta property="og:description" content="集合对于JAVA来说是一个非常基础也非常重要的东西，因为任何数据都需要存储。而ArrayList,在我初入这行业时，只要用到数据第一时间就会想到它。在经历过尽力过几年磨砺之后，ArrayList也不再是我的首选，但并不代表着用不到它，为了更好的运用各种集合，就有必要进行源码的阅读。">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://blog.lsiru.com/2019/09/15/源码-ArrayList/1.png">
-<meta property="og:image" content="http://blog.lsiru.com/2019/09/15/源码-ArrayList/2.png">
-<meta property="og:updated_time" content="2019-09-17T15:18:48.784Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="源码-ArrayList">
-<meta name="twitter:description" content="集合对于JAVA来说是一个非常基础也非常重要的东西，因为任何数据都需要存储。而ArrayList,在我初入这行业时，只要用到数据第一时间就会想到它。在经历过尽力过几年磨砺之后，ArrayList也不再是我的首选，但并不代表着用不到它，为了更好的运用各种集合，就有必要进行源码的阅读。">
-<meta name="twitter:image" content="http://blog.lsiru.com/2019/09/15/源码-ArrayList/1.png">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Pisces',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://blog.lsiru.com/2019/09/15/源码-ArrayList/">
-
-
-
-
-
-  <title>源码-ArrayList | XiaoGuai's blog</title>
-  
-
-
-
-
-
-
-
-
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <title>XiaoGuai&#39;s blog</title>
+
+	<link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+	<script type="text/javascript">
+		 $(window).scroll(function(){
+				console.log($(window).scrollTop());
+				if($(window).scrollTop()> 100 ){
+					$('#return-top').fadeIn(300);
+					}
+				 else{$('#return-top').fadeOut(200);}
+					 })
+
+
+		// 点击按钮，使得页面返回顶部
+		$("#return-top").click(function(){
+			$('body,html').animate({scrollTop:0},300);
+		});
+		// 鼠标悬浮按钮之上，图片消失，文字显示
+		$(".top_e").mouseover(function(){
+			$("#img").hide();
+			$("#font").show();
+		})
+		//鼠标离开，文字消失，图片显示。
+		$(".top_e").mouseout(function(){
+			$("#font").hide();
+			$("#img").show();
+		})
+		
+		function toTop(){
+			$('body,html').animate({scrollTop:0},500);
+		}
+		
+	</script>
 </head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
+  <body>
   
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">XiaoGuai's blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle"></p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
-            
-            归档
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.lsiru.com/2019/09/15/源码-ArrayList/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Qiwei Guo">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XiaoGuai's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">源码-ArrayList</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-15T23:15:22+08:00">
-                2019-09-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>集合对于JAVA来说是一个非常基础也非常重要的东西，因为任何数据都需要存储。<br>而ArrayList,在我初入这行业时，只要用到数据第一时间就会想到它。在经历过尽力过几年磨砺之后，ArrayList也不再是我的首选，但并不代表着用不到它，为了更好的运用各种集合，就有必要进行源码的阅读。<br><a id="more"></a></p>
+	<div class="container ">
+		<header class="header">
+	<div class="row clearfix">
+		<div class="col-md-2 column">
+		</div>
+		<div class="col-md-7 column">
+			<div class="blog-title">
+				<a href="/" class="logo">XiaoGuai&#39;s blog</a>
+			</div>
+			<ul class="nav nav-tabs">
+				
+					<li>
+						<a href="/archives">归档</a>
+					</li>
+				
+					<li class="active">
+						<a href="/">首页</a>
+					</li>
+				
+			</ul>
+		</div>
+		<div class="col-md-3 column">
+		</div>
+	</div>
+	
+</header>
+		<main class="main">
+		  <div class="row clearfix">
+			<div class="col-md-2 column">
+			</div>
+			<div class="col-md-7 column">
+			<div class="post">
+	<span class="post-title">源码-ArrayList</span>
+	 <div class="post-meta">
+		<span class="post-time text-muted">写于2019年09月15日</span>
+	  </div>
+	  <br>
+	  <br>
+	  <div class="post-content">
+		<p>集合对于JAVA来说是一个非常基础也非常重要的东西，因为任何数据都需要存储。<br>而ArrayList,在我初入这行业时，只要用到数据第一时间就会想到它。在经历过尽力过几年磨砺之后，ArrayList也不再是我的首选，但并不代表着用不到它，为了更好的运用各种集合，就有必要进行源码的阅读。<br><a id="more"></a></p>
 <h1 id="ArrayList概述"><a href="#ArrayList概述" class="headerlink" title="ArrayList概述"></a>ArrayList概述</h1><p>ArrayList底层其实是数组，一个动态数组，容量能够动态增长。<br>它继承了AbstractList，实现了List、RandomAccess、Cloneable、java.io.Serializable这些接口。<br>RandomAccess是一个标志接口，表明实现这个接口的List集合是支持快速随机访问的。<br>快速随机访问：在ArrayList中通过元素的序号快速获取元素对象，这就是快速随机访问。<br>Cloneable也是个标记接口，表明能被克隆。<br>java.io.Serializable表示ArrayList支持序列化。<br>ArrayList不是线程安全，建议在单线程中使用ArrayList.</p>
 <h1 id="常量变量"><a href="#常量变量" class="headerlink" title="常量变量"></a>常量变量</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_CAPACITY = <span class="number">10</span>; <span class="comment">//默认容量</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object[] EMPTY_ELEMENTDATA = &#123;&#125;;  <span class="comment">//空数组，用于空实例</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = &#123;&#125;;<span class="comment">//空数组</span></span><br><span class="line"><span class="keyword">transient</span> Object[] elementData;<span class="comment">//元素所在数组。transient:表示不参与序列化</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> size;  <span class="comment">//arrayList中所包含元素的个数</span></span><br></pre></td></tr></table></figure>
 <h1 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h1><h2 id="ArrayList-int-initialCapacity"><a href="#ArrayList-int-initialCapacity" class="headerlink" title="ArrayList(int initialCapacity)"></a>ArrayList(int initialCapacity)</h2><p>构建长度为 initialCapacity的数组。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">(<span class="keyword">int</span> initialCapacity)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (initialCapacity &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>.elementData = <span class="keyword">new</span> Object[initialCapacity];</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (initialCapacity == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>.elementData = EMPTY_ELEMENTDATA;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Illegal Capacity: "</span>+</span><br><span class="line">                                           initialCapacity);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -346,362 +127,36 @@
 <h2 id="SubList"><a href="#SubList" class="headerlink" title="SubList"></a>SubList</h2><p>大部分调用的是ListIterator匿名内部类,相差不多。</p>
 <h2 id="ArrayListSpliterator"><a href="#ArrayListSpliterator" class="headerlink" title="ArrayListSpliterator"></a>ArrayListSpliterator</h2><p>待研究</p>
 
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/05/06/webUploader常用功能/" rel="next" title="webUploader常用功能">
-                <i class="fa fa-chevron-left"></i> webUploader常用功能
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name">Qiwei Guo</p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">5</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ArrayList概述"><span class="nav-number">1.</span> <span class="nav-text">ArrayList概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常量变量"><span class="nav-number">2.</span> <span class="nav-text">常量变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构造函数"><span class="nav-number">3.</span> <span class="nav-text">构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList-int-initialCapacity"><span class="nav-number">3.1.</span> <span class="nav-text">ArrayList(int initialCapacity)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList"><span class="nav-number">3.2.</span> <span class="nav-text">ArrayList()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList-Collection-lt-extends-E-gt-c"><span class="nav-number">3.3.</span> <span class="nav-text">ArrayList(Collection&lt;? extends E&gt; c)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ArrayList扩容机制相关代码"><span class="nav-number">4.</span> <span class="nav-text">ArrayList扩容机制相关代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ensureCapacity-int-minCapacity"><span class="nav-number">4.1.</span> <span class="nav-text">ensureCapacity(int minCapacity)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#calculateCapacity-Object-elementData-int-minCapacity"><span class="nav-number">4.2.</span> <span class="nav-text">calculateCapacity(Object[] elementData, int minCapacity)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ensureExplicitCapacity-int-minCapacity"><span class="nav-number">4.3.</span> <span class="nav-text">ensureExplicitCapacity(int minCapacity)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#grow-int-minCapacity"><span class="nav-number">4.4.</span> <span class="nav-text">grow(int minCapacity)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hugeCapacity-int-minCapacity"><span class="nav-number">4.5.</span> <span class="nav-text">hugeCapacity(int minCapacity)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他方法"><span class="nav-number">5.</span> <span class="nav-text">其他方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#trimToSize"><span class="nav-number">5.1.</span> <span class="nav-text">trimToSize()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#size"><span class="nav-number">5.2.</span> <span class="nav-text">size()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isEmpty"><span class="nav-number">5.3.</span> <span class="nav-text">isEmpty()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#indexOf-Object-o"><span class="nav-number">5.4.</span> <span class="nav-text">indexOf(Object o)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lastIndexOf-Object-o"><span class="nav-number">5.5.</span> <span class="nav-text">lastIndexOf(Object o)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clone"><span class="nav-number">5.6.</span> <span class="nav-text">clone()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#toArray"><span class="nav-number">5.7.</span> <span class="nav-text">toArray()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#toArray-T-a"><span class="nav-number">5.8.</span> <span class="nav-text">toArray(T[] a)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#get-int-index"><span class="nav-number">5.9.</span> <span class="nav-text">get(int index)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set-int-index-E-element"><span class="nav-number">5.10.</span> <span class="nav-text">set(int index, E element)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#add-E-e"><span class="nav-number">5.11.</span> <span class="nav-text">add(E e)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#add-int-index-E-element"><span class="nav-number">5.12.</span> <span class="nav-text">add(int index, E element)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#remove-int-index"><span class="nav-number">5.13.</span> <span class="nav-text">remove(int index)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#remove-Object-o"><span class="nav-number">5.14.</span> <span class="nav-text">remove(Object o)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fastRemove-int-index"><span class="nav-number">5.15.</span> <span class="nav-text">fastRemove(int index)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clear"><span class="nav-number">5.16.</span> <span class="nav-text">clear()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#addAll-Collection-lt-extends-E-gt-c"><span class="nav-number">5.17.</span> <span class="nav-text">addAll(Collection&lt;? extends E&gt; c)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#addAll-int-index-Collection-lt-extends-E-gt-c"><span class="nav-number">5.18.</span> <span class="nav-text">addAll(int index, Collection&lt;? extends E&gt; c)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#removeRange-int-fromIndex-int-toIndex"><span class="nav-number">5.19.</span> <span class="nav-text">removeRange(int fromIndex, int toIndex)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rangeCheck-int-index"><span class="nav-number">5.20.</span> <span class="nav-text">rangeCheck(int index)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rangeCheckForAdd-int-index"><span class="nav-number">5.21.</span> <span class="nav-text">rangeCheckForAdd(int index)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#outOfBoundsMsg-int-index"><span class="nav-number">5.22.</span> <span class="nav-text">outOfBoundsMsg(int index)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#removeAll-Collection-lt-gt-c"><span class="nav-number">5.23.</span> <span class="nav-text">removeAll(Collection&lt;?&gt; c)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#retainAll-Collection-lt-gt-c"><span class="nav-number">5.24.</span> <span class="nav-text">retainAll(Collection&lt;?&gt; c)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#batchRemove-Collection-lt-gt-c-boolean-complement"><span class="nav-number">5.25.</span> <span class="nav-text">batchRemove(Collection&lt;?&gt; c, boolean complement)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#writeObject和readObject"><span class="nav-number">5.26.</span> <span class="nav-text">writeObject和readObject</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#内部类"><span class="nav-number">6.</span> <span class="nav-text">内部类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Itr"><span class="nav-number">6.1.</span> <span class="nav-text">Itr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ListItr"><span class="nav-number">6.2.</span> <span class="nav-text">ListItr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SubList"><span class="nav-number">6.3.</span> <span class="nav-text">SubList</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayListSpliterator"><span class="nav-number">6.4.</span> <span class="nav-text">ArrayListSpliterator</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Qiwei Guo</span>
-
-  
+	  </div>
 </div>
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
 
 
 
   
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
+			
+			</div>
+			<div class="col-md-3 column">
+				<a class="btn btn-default hidden-sm hidden-xs " onclick="toTop()" role="button" style="position:fixed;bottom:50px;display:none;" id="return-top">
+					<span class="hidden-sm hidden-xs">回到顶部</span>
+				</a>
+			</div>
+		</div>
+		</main>
+		
+		<div class="row clearfix">
+	<div class="col-md-2 column">
+</div>
+<div class="col-md-7 column text-center">
+	<div style="margin-top: 3.5em;margin-bottom: 2.1em;">
+		<span>Powered by <b><a href="http://hexo.io">Hexo</a></b></span>
+	</div>
+</div>
+<div class="col-md-3 column">
+	</div>
+</div>
+	</div>
 	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
-</body>
+  </body>
 </html>

@@ -1,0 +1,159 @@
+.header {
+  padding-top: 24px;
+  padding-bottom: 40px;
+}
+.header .blog-title .logo {
+  color: #000;
+  font-size: 2.2em;
+  font-family: "Comic Sans MS", cursive, LiSu, sans-serif;
+  text-decoration: none;
+}
+small {
+  font-size: 90%;
+}
+.post .post-title {
+  font-size: 25px;
+  font-weight: bold;
+}
+.post .post-meta {
+  margin-top: 13px;
+}
+.post .post-content h1 {
+  font-size: 22px;
+}
+.post .post-content h2 {
+  font-size: 20px;
+}
+.post .post-content h2 {
+  font-size: 18px;
+}
+.post pre,
+.post .highlight {
+  overflow: auto;
+  margin: 20px 0;
+  padding: 0;
+  font-size: 13px;
+  color: #4d4d4c;
+  background: #f7f7f7;
+  line-height: 1.6;
+}
+.post pre,
+.post code {
+  font-family: consolas, Menlo, "PingFang SC", "Microsoft YaHei", monospace;
+}
+.post code {
+  padding: 2px 4px;
+  word-wrap: break-word;
+  color: #555;
+  background: #eee;
+  border-radius: 3px;
+  font-size: 13px;
+}
+.post pre {
+  padding: 10px;
+}
+.post pre code {
+  padding: 0;
+  color: #4d4d4c;
+  background: none;
+  text-shadow: none;
+}
+.post .highlight {
+  border-radius: 1px;
+}
+.post .highlight pre {
+  border: none;
+  margin: 0;
+  padding: 10px 0;
+}
+.post .highlight table {
+  margin: 0;
+  width: auto;
+  border: none;
+}
+.post .highlight td {
+  border: none;
+  padding: 0;
+}
+.post .highlight figcaption {
+  font-size: 1em;
+  color: #4d4d4c;
+  line-height: 1em;
+  margin-bottom: 1em;
+}
+.post .highlight figcaption:before,
+.post .highlight figcaption:after {
+  content: " ";
+  display: table;
+}
+.post .highlight figcaption:after {
+  clear: both;
+}
+.post .highlight figcaption a {
+  float: right;
+  color: #4d4d4c;
+}
+.post .highlight figcaption a:hover {
+  border-bottom-color: #4d4d4c;
+}
+.post .highlight .gutter pre {
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #869194;
+  text-align: right;
+  background-color: #eff2f3;
+}
+.post .highlight .code pre {
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #f7f7f7;
+}
+.post .highlight .line {
+  height: 20px;
+}
+.archive {
+  padding-left: 15px;
+}
+.archive li {
+  margin-left: 1em;
+  font-size: 15px;
+  line-height: 1.6em;
+}
+.archive li .title {
+  color: #6e7173;
+  text-decoration: none;
+}
+.archive .year {
+  font: bold 25px/1.1 "ff-tisa-web-pro", Cambria, "Times New Roman", Georgia, Times, sans-serif;
+}
+.archive .post-date {
+  display: inline-block;
+  margin-right: 10px;
+  color: #bababa;
+}
+.page-nav {
+  padding: 0.5em 0;
+  text-align: center;
+  background-color: #fff;
+  box-shadow: 0 0 2px #ddd;
+  margin-bottom: 1em;
+}
+.page-nav .prev,
+.page-nav .next,
+.page-nav .page-number {
+  padding: 0.1em 0.5em;
+}
+.page-nav .prev {
+  float: left;
+}
+.page-nav .next {
+  float: right;
+}
+.page-nav a {
+  color: #777;
+  text-decoration: none;
+}
+.page-nav a:hover {
+  color: #368ccb;
+}
