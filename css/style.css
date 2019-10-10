@@ -27,6 +27,9 @@ small {
 .post .post-content h2 {
   font-size: 18px;
 }
+.post img {
+  max-width: 100%;
+}
 .post pre,
 .post .highlight {
   overflow: auto;
