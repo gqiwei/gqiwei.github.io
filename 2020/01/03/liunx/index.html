@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <title>XiaoGuai&#39;s blog</title>
+
+	<link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+	<script type="text/javascript">
+		 $(window).scroll(function(){
+				console.log($(window).scrollTop());
+				if($(window).scrollTop()> 100 ){
+					$('#return-top').fadeIn(300);
+					}
+				 else{$('#return-top').fadeOut(200);}
+					 })
+
+
+		// 点击按钮，使得页面返回顶部
+		$("#return-top").click(function(){
+			$('body,html').animate({scrollTop:0},300);
+		});
+		// 鼠标悬浮按钮之上，图片消失，文字显示
+		$(".top_e").mouseover(function(){
+			$("#img").hide();
+			$("#font").show();
+		})
+		//鼠标离开，文字消失，图片显示。
+		$(".top_e").mouseout(function(){
+			$("#font").hide();
+			$("#img").show();
+		})
+		
+		function toTop(){
+			$('body,html').animate({scrollTop:0},500);
+		}
+		
+	</script>
+</head>
+  <body>
+  
+	<div class="container ">
+		<header class="header">
+	<div class="row clearfix">
+		<div class="col-md-2 column">
+		</div>
+		<div class="col-md-7 column">
+			<div class="blog-title">
+				<a href="/" class="logo">XiaoGuai&#39;s blog</a>
+			</div>
+			<ul class="nav nav-tabs">
+				
+					<li>
+						<a href="/archives">归档</a>
+					</li>
+				
+					<li class="active">
+						<a href="/">首页</a>
+					</li>
+				
+			</ul>
+		</div>
+		<div class="col-md-3 column">
+		</div>
+	</div>
+	
+</header>
+		<main class="main">
+		  <div class="row clearfix">
+			<div class="col-md-2 column">
+			</div>
+			<div class="col-md-7 column">
+			<div class="post">
+	<span class="post-title">liunx配置jdk，mysql傻瓜式流程</span>
+	 <div class="post-meta">
+		<span class="post-time text-muted">写于2020年01月03日</span>
+	  </div>
+	  <br>
+	  <br>
+	  <div class="post-content">
+		<p>两年前的阿里云，里面环境太老了比如python，然后因为不是专门的运维，不会升级，所以把服务器重置，系统选了新的centos，重新配置环境，并记录下。<br>阿里云CentOS 7.7 64位。<br>连接工具xshell，xftp。<a id="more"></a></p>
+<h1 id="配置jdk"><a href="#配置jdk" class="headerlink" title="配置jdk"></a>配置jdk</h1><p>压缩包是自己多年保存下来的，jdk1.8。可以去官网下载。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr</span><br><span class="line">mkdir java</span><br><span class="line">cd java</span><br></pre></td></tr></table></figure></p>
+<p>然后将jdk压缩包用xftp拖上去。<br><img src="https://xiaoguaiblog.oss-cn-shanghai.aliyuncs.com/%E5%B0%8F%E6%80%AA%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/liunx/1.png" alt><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf jdk-8u111-linux-x64.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>配置环境变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br></pre></td></tr></table></figure></p>
+<p>把下面配置添加到文件中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/java/jdk1.8.0_111</span><br><span class="line">export PATH=$JAVA_HOME/bin:$PATH</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://xiaoguaiblog.oss-cn-shanghai.aliyuncs.com/%E5%B0%8F%E6%80%AA%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/liunx/2.png" alt><br>如果忘记vim如何使用，进入<a href="https://www.runoob.com/linux/linux-vim.html" target="_blank" rel="noopener">菜鸟教程</a>重新学习。<br>保存好文件后<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure></p>
+<p>查看java版本<br><img src="https://xiaoguaiblog.oss-cn-shanghai.aliyuncs.com/%E5%B0%8F%E6%80%AA%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/liunx/3.png" alt></p>
+<h1 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h1><p>安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget -i -c http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm</span><br><span class="line">yum -y install mysql57-community-release-el7-10.noarch.rpm</span><br><span class="line">yum -y install mysql-community-server</span><br></pre></td></tr></table></figure></p>
+<p>启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start  mysqld.service</span><br></pre></td></tr></table></figure></p>
+<p>查看运行状态<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status mysqld.service</span><br></pre></td></tr></table></figure></p>
+<p>寻找root用户密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep &quot;password&quot; /var/log/mysqld.log</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://xiaoguaiblog.oss-cn-shanghai.aliyuncs.com/%E5%B0%8F%E6%80%AA%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/liunx/4.png" alt><br>登录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://xiaoguaiblog.oss-cn-shanghai.aliyuncs.com/%E5%B0%8F%E6%80%AA%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/liunx/5.png" alt><br>修改密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER USER &apos;root&apos;@&apos;localhost&apos; IDENTIFIED BY &apos;new password&apos;;</span><br></pre></td></tr></table></figure></p>
+<p>修改密码会提示<code>ERROR 1819 (HY000): Your password does not satisfy the current policy requirements</code>，这是密码设置规范的原因,设置成字母大小写数字加特殊符号。<br>查看密码设置规则<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW VARIABLES LIKE &apos;validate_password%&apos;;</span><br></pre></td></tr></table></figure></p>
+<p>创建授权<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grant all privileges on *.* to &apos;root&apos;@&apos;%&apos; identified by &apos;123456&apos; with grant option;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure></p>
+<p>在阿里云设置了安全组，mysql账号权限也放开后，外部连不上mysql，我这里是直接关闭了防火墙。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br></pre></td></tr></table></figure></p>
+
+	  </div>
+</div>
+
+
+
+
+
+  
+			
+			</div>
+			<div class="col-md-3 column">
+				<a class="btn btn-default hidden-sm hidden-xs " onclick="toTop()" role="button" style="position:fixed;bottom:50px;display:none;" id="return-top">
+					<span class="hidden-sm hidden-xs">回到顶部</span>
+				</a>
+			</div>
+		</div>
+		</main>
+		
+		<div class="row clearfix">
+	<div class="col-md-2 column">
+</div>
+<div class="col-md-7 column text-center">
+	<div style="margin-top: 3.5em;margin-bottom: 2.1em;">
+		<span>Powered by <b><a href="http://hexo.io">Hexo</a></b></span>
+	</div>
+</div>
+<div class="col-md-3 column">
+	</div>
+</div>
+	</div>
+	
+  </body>
+</html>
