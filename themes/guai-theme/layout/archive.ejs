@@ -1,0 +1,25 @@
+<section class="archive">
+	<% var last; %>
+	  <% page.posts.each(function(post, i){ %>
+		<% var year = post.date.year(); %>
+		<% if (last != year){ %>
+		  <% last = year; %>
+		  
+			<h3 class="year">
+				<%= year %>
+			</h3>
+			
+		<% } %>
+		<li class="post-item">
+			<span class="post-date"><%= date(post.date, "YYYY-MM-DD") %></span>
+			<a href="<%- url_for(post.path) %>"  class="title">
+			    <%= post.title %><br>
+			</a>
+		 </li>
+	  <% }) %>
+</section>
+
+
+
+
+

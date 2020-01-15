@@ -1,0 +1,42 @@
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <title><%= config.title %></title>
+
+	<%- css('css/style.css') %>
+    <%- css('css/bootstrap.css') %>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+	<script type="text/javascript">
+		 $(window).scroll(function(){
+				console.log($(window).scrollTop());
+				if($(window).scrollTop()> 100 ){
+					$('#return-top').fadeIn(300);
+					}
+				 else{$('#return-top').fadeOut(200);}
+					 })
+
+
+		// 点击按钮，使得页面返回顶部
+		$("#return-top").click(function(){
+			$('body,html').animate({scrollTop:0},300);
+		});
+		// 鼠标悬浮按钮之上，图片消失，文字显示
+		$(".top_e").mouseover(function(){
+			$("#img").hide();
+			$("#font").show();
+		})
+		//鼠标离开，文字消失，图片显示。
+		$(".top_e").mouseout(function(){
+			$("#font").hide();
+			$("#img").show();
+		})
+		
+		function toTop(){
+			$('body,html').animate({scrollTop:0},500);
+		}
+		
+	</script>
+</head>

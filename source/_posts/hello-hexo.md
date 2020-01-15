@@ -1,7 +1,10 @@
 ---
 title: Hello Hexo
 date: 2019-04-16 22:59:58
+categories:
+- 随笔
 tags:
+- blog
 ---
 
 Hello Hexo!

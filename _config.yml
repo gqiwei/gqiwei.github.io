@@ -4,11 +4,11 @@
 
 # Site
 title: XiaoGuai's blog
-subtitle:
+subtitle: Guo
 description:
 keywords:
 author: Qiwei Guo
-language: zh-Hans
+language: zh-CN
 timezone:
 
 # URL
@@ -35,7 +35,7 @@ titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: true
 relative_link: false
 future: true
 highlight:
@@ -50,7 +50,7 @@ highlight:
 # order_by: Posts order. (Order by date descending by default)
 index_generator:
   path: ''
-  per_page: 10
+  per_page: 7
   order_by: -date
   
 # Category & Tag
@@ -67,13 +67,13 @@ time_format: HH:mm:ss
 
 # Pagination
 ## Set per_page to 0 to disable pagination
-per_page: 10
+per_page: 0
 pagination_dir: page
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: guai-theme
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

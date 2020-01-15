@@ -1,11 +1,16 @@
 ---
 title: webUploader常用功能
 date: 2019-05-06 23:14:14
+categories:
+- 笔记
 tags:
+- 前端
+- WebUploader
 ---
-
-# 建一个图片上传
+此前工作时，前端的图片上传样式一直有问题，加上前端人员无暇顾及，便在网上寻找一个合适的图片上传插件，最终发现了这款插件WebUploader，并且发现好几个游戏交易网站的图片上传插件也是这个，于是抽空学习记录了下。
 <!--more-->
+# 建一个图片上传
+
 	var uploader=WebUploader.create({
 		auto:false,		//是否开启选择图片后自动上传,true:开启,false:关闭
 		server:'upload.do',	//上传接口
@@ -33,7 +38,7 @@ tags:
 		},
 
 		compress:{					//配置压缩图片的选项，如果为false，则上传前不进行压缩
-			width:1600,				
+			width:1600,
 			height:1600,
 			quality:50,				//图片压缩质量，只有type为image/jpeg的时候才有效
 			allowMagnify:false,			//是否允许放大，生成小图不失真请选择false
@@ -116,7 +121,7 @@ callback中可以接收两个参数
 				+ '</div>'), $img = $li.find('img');
 		$("#fileList").append($li);
 
-		uploader.makeThumb(file, function(error, src) {				//生成缩略图	
+		uploader.makeThumb(file, function(error, src) {				//生成缩略图
 			if (error) {
 				$("#fileList").replaceWith('<span>不能预览</span>');
 				return;
@@ -148,4 +153,3 @@ upload(file|fileId)
 stop()
 stop(true)
 stop(file)
-

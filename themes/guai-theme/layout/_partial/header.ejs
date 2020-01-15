@@ -1,0 +1,33 @@
+<header class="header">
+	<div class="row clearfix">
+		<div class="col-md-2 column">
+		</div>
+		<div class="col-md-7 column">
+			<div class="blog-title">
+				<a href="<%- url_for() %>" class="logo"><%= config.title %></a>
+			</div>
+			<ul class="nav nav-tabs">
+				<% for (name in theme.menu) { %>
+					<li 
+						<% if (url_for(theme.menu[name])=='/'&&is_home()){ %> 
+							class="active" 
+						<% }else if(url_for(theme.menu[name])=='/'&&is_post()) {%> 
+							class="active" 
+						<% }else if(url_for(theme.menu[name])=='/archives'&&is_archive()) {%> 
+							class="active"
+						<% }else if(url_for(theme.menu[name])=='/tags'&&is_tag()) {%> 
+							class="active" 
+						<% }else if(url_for(theme.menu[name])=='/categories'&&is_category()) {%> 
+							class="active" 
+						<% } %> 
+					>
+						<a href="<%- url_for(theme.menu[name]) %>"><%- __('Menu.' + name) %></a>
+					</li>
+				<% } %>
+			</ul>
+		</div>
+		<div class="col-md-3 column">
+		</div>
+	</div>
+	
+</header>
