@@ -29,6 +29,11 @@ small {
 }
 .post img {
   max-width: 100%;
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+}
+.post pre .comment {
+  color: #8e908c;
 }
 .post pre,
 .post .highlight {
