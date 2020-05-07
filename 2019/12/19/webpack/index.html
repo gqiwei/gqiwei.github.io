@@ -13,7 +13,7 @@
 
 	<script type="text/javascript">
 		 $(window).scroll(function(){
-				console.log($(window).scrollTop());
+				// console.log($(window).scrollTop());
 				if($(window).scrollTop()> 100 ){
 					$('#return-top').fadeIn(300);
 					}
@@ -37,9 +37,21 @@
 		})
 		
 		function toTop(){
-			$('body,html').animate({scrollTop:0},500);
+			$('body,html').animate({scrollTop:0},400);
 		}
-		
+
+
+		$(document).ready(function() {
+			var $arContent = $('.post-content');
+			$arContentAnchor = $arContent.find('.headerlink');
+			$("#article-toc").find('a').each(function(i){
+				var $this = $(this);
+				$this.click(function(e){
+					e.preventDefault();
+					$('html,body').animate({ scrollTop: $arContentAnchor.eq(i).offset().top - 40}, 400, 'swing');
+				});
+			});
+		});
 	</script>
 </head>
   <body>
@@ -135,6 +147,21 @@
 			
 			</div>
 			<div class="col-md-3 column">
+				
+					 	
+				
+					 
+						<aside id="article-toc" role="navigation" class="fixed">
+							<div id="article-toc-inner">
+								<strong class="sidebar-title">
+									目录
+								</strong>
+								<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#本机环境及开发工具"><span class="toc-text">本机环境及开发工具</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#开始"><span class="toc-text">开始</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#初始化项目"><span class="toc-text">初始化项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装cnpm"><span class="toc-text">安装cnpm</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装webpack"><span class="toc-text">安装webpack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一个简单示例"><span class="toc-text">一个简单示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#webpack-config-js-配置简化打包"><span class="toc-text">webpack.config.js 配置简化打包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进一步优化"><span class="toc-text">进一步优化</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用本地服务器"><span class="toc-text">使用本地服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装webpack-dev-server"><span class="toc-text">安装webpack-dev-server</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改配置"><span class="toc-text">修改配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码调试"><span class="toc-text">代码调试</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Loaders"><span class="toc-text">Loaders</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Babel"><span class="toc-text">Babel</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#插件"><span class="toc-text">插件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HtmlWebpackPlugin自动生成html文件"><span class="toc-text">HtmlWebpackPlugin自动生成html文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HotModuleReplacementPlugin热更新"><span class="toc-text">HotModuleReplacementPlugin热更新</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CleanWebpackPlugin清理文件"><span class="toc-text">CleanWebpackPlugin清理文件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#其他"><span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#多入口"><span class="toc-text">多入口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#遇到的问题"><span class="toc-text">遇到的问题</span></a></li></ol></li></ol>
+							</div>
+						</aside>
+					 	
+				
+
 				<a class="btn btn-default hidden-sm hidden-xs " onclick="toTop()" role="button" style="position:fixed;bottom:50px;display:none;" id="return-top">
 					<span class="hidden-sm hidden-xs">回到顶部</span>
 				</a>

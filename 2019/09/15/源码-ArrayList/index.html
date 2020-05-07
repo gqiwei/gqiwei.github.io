@@ -13,7 +13,7 @@
 
 	<script type="text/javascript">
 		 $(window).scroll(function(){
-				console.log($(window).scrollTop());
+				// console.log($(window).scrollTop());
 				if($(window).scrollTop()> 100 ){
 					$('#return-top').fadeIn(300);
 					}
@@ -37,9 +37,21 @@
 		})
 		
 		function toTop(){
-			$('body,html').animate({scrollTop:0},500);
+			$('body,html').animate({scrollTop:0},400);
 		}
-		
+
+
+		$(document).ready(function() {
+			var $arContent = $('.post-content');
+			$arContentAnchor = $arContent.find('.headerlink');
+			$("#article-toc").find('a').each(function(i){
+				var $this = $(this);
+				$this.click(function(e){
+					e.preventDefault();
+					$('html,body').animate({ scrollTop: $arContentAnchor.eq(i).offset().top - 40}, 400, 'swing');
+				});
+			});
+		});
 	</script>
 </head>
   <body>
@@ -138,6 +150,21 @@
 			
 			</div>
 			<div class="col-md-3 column">
+				
+					 	
+				
+					 
+						<aside id="article-toc" role="navigation" class="fixed">
+							<div id="article-toc-inner">
+								<strong class="sidebar-title">
+									目录
+								</strong>
+								<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ArrayList概述"><span class="toc-text">ArrayList概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#常量变量"><span class="toc-text">常量变量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#构造函数"><span class="toc-text">构造函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ArrayList-int-initialCapacity"><span class="toc-text">ArrayList(int initialCapacity)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ArrayList"><span class="toc-text">ArrayList()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ArrayList-Collection-lt-extends-E-gt-c"><span class="toc-text">ArrayList(Collection&lt;? extends E&gt; c)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ArrayList扩容机制相关代码"><span class="toc-text">ArrayList扩容机制相关代码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ensureCapacity-int-minCapacity"><span class="toc-text">ensureCapacity(int minCapacity)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#calculateCapacity-Object-elementData-int-minCapacity"><span class="toc-text">calculateCapacity(Object[] elementData, int minCapacity)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ensureExplicitCapacity-int-minCapacity"><span class="toc-text">ensureExplicitCapacity(int minCapacity)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#grow-int-minCapacity"><span class="toc-text">grow(int minCapacity)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hugeCapacity-int-minCapacity"><span class="toc-text">hugeCapacity(int minCapacity)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#其他方法"><span class="toc-text">其他方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#trimToSize"><span class="toc-text">trimToSize()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#size"><span class="toc-text">size()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#isEmpty"><span class="toc-text">isEmpty()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#indexOf-Object-o"><span class="toc-text">indexOf(Object o)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lastIndexOf-Object-o"><span class="toc-text">lastIndexOf(Object o)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#clone"><span class="toc-text">clone()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#toArray"><span class="toc-text">toArray()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#toArray-T-a"><span class="toc-text">toArray(T[] a)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#get-int-index"><span class="toc-text">get(int index)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#set-int-index-E-element"><span class="toc-text">set(int index, E element)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#add-E-e"><span class="toc-text">add(E e)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#add-int-index-E-element"><span class="toc-text">add(int index, E element)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#remove-int-index"><span class="toc-text">remove(int index)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#remove-Object-o"><span class="toc-text">remove(Object o)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fastRemove-int-index"><span class="toc-text">fastRemove(int index)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#clear"><span class="toc-text">clear()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#addAll-Collection-lt-extends-E-gt-c"><span class="toc-text">addAll(Collection&lt;? extends E&gt; c)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#addAll-int-index-Collection-lt-extends-E-gt-c"><span class="toc-text">addAll(int index, Collection&lt;? extends E&gt; c)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#removeRange-int-fromIndex-int-toIndex"><span class="toc-text">removeRange(int fromIndex, int toIndex)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rangeCheck-int-index"><span class="toc-text">rangeCheck(int index)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rangeCheckForAdd-int-index"><span class="toc-text">rangeCheckForAdd(int index)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#outOfBoundsMsg-int-index"><span class="toc-text">outOfBoundsMsg(int index)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#removeAll-Collection-lt-gt-c"><span class="toc-text">removeAll(Collection&lt;?&gt; c)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#retainAll-Collection-lt-gt-c"><span class="toc-text">retainAll(Collection&lt;?&gt; c)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#batchRemove-Collection-lt-gt-c-boolean-complement"><span class="toc-text">batchRemove(Collection&lt;?&gt; c, boolean complement)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#writeObject和readObject"><span class="toc-text">writeObject和readObject</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#内部类"><span class="toc-text">内部类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Itr"><span class="toc-text">Itr</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ListItr"><span class="toc-text">ListItr</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SubList"><span class="toc-text">SubList</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ArrayListSpliterator"><span class="toc-text">ArrayListSpliterator</span></a></li></ol></li></ol>
+							</div>
+						</aside>
+					 	
+				
+
 				<a class="btn btn-default hidden-sm hidden-xs " onclick="toTop()" role="button" style="position:fixed;bottom:50px;display:none;" id="return-top">
 					<span class="hidden-sm hidden-xs">回到顶部</span>
 				</a>
