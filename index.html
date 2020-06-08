@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
-  <head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.8.0">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <title>XiaoGuai&#39;s blog</title>
 
-	<link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/bootstrap.css">
+	  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+	  <link rel="stylesheet" href="/css/style.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -54,9 +55,144 @@
 		});
 	</script>
 </head>
-  <body>
-  
-	<div class="container ">
+
+<body>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3 side-container fadeInRight">
+				<div class="blog-title">
+    <h1 style class="text_title">
+        <a href="/" class="co">我是小怪</a>
+    </h1>
+    <h3 class="text_subtitle">
+        <a href="/" class="co">人生，只不过是回忆往昔</a>
+    </h3>
+</div>
+
+<div class="blog-nav">
+    <ul>
+        
+            <li>
+                <a class="active" href="/">首页</a>
+            </li>
+        
+            <li>
+                <a href="/archives">归档</a>
+            </li>
+        
+      
+        <li>
+            <a href="/"><i class="fa fa-github">&nbsp;</i></a>
+            <a href="/"><i class="fa fa-github">&nbsp;</i></a>
+        </li>
+    </ul>
+</div>
+
+
+			</div>
+			<div class="col-sm-9" style="float:left;padding-top: 40px;text-align: left;">
+				
+	<h3>
+		<a class="text-muted" href="/2020/04/17/mybatis1/">mybatis源码笔记（一）</a>
+	</h3>
+	<small>2020-04-17</small>
+	<p>
+		</p><p>mybatis是现在流行的持久层框架，现在这家公司也从之前的ssh项目慢慢转成了ssm项目，而我之前用过ibatis，ibatis正是mybatis的前身。故想找时间来阅读下其源码，但是每天能抽出来的时间有限，只能慢慢的记录下来。<br>
+	</p>
+	<p class="text-right">
+		<a class="btn" href="/2020/04/17/mybatis1/">more »</a>
+	</p>
+
+	<h3>
+		<a class="text-muted" href="/2020/01/03/liunx/">liunx配置jdk，mysql傻瓜式流程</a>
+	</h3>
+	<small>2020-01-03</small>
+	<p>
+		</p><p>两年前的阿里云，里面环境太老了比如python，然后因为不是专门的运维，不会升级，所以把服务器重置，系统选了新的centos，重新配置环境，并记录下。<br>阿里云CentOS 7.7 64位。<br>连接工具xshell，xftp。
+	</p>
+	<p class="text-right">
+		<a class="btn" href="/2020/01/03/liunx/">more »</a>
+	</p>
+
+	<h3>
+		<a class="text-muted" href="/2019/12/19/webpack/">webpack使用笔记</a>
+	</h3>
+	<small>2019-12-19</small>
+	<p>
+		</p><p>从17年应届进入一家外包开始到现在已经呆过三家公司了，从前后端分离的情况来看，做的最好竟然还是那家外包公司，虽然他们用着eclipse进行编写页面调试，用着velocity模板引擎，但至少给他们数据结构，他们还是能把页面给做好。后来去了家创业公司，前端也只是制作静态页面，当给数据时，还得我们自己来调整页面，实在调不准才请教前端人员，可惜公司资金链断了。来到第三家公司，或许因为业务形式的原因，这一家公司完全没有专门的前端，后端的人揽了全部的活，唯一的优点就是有了专门的运维，我也不至于再去折腾服务器。<br>面试过很多人，绝大部分都是只专注于后端，没接触过前端，也有几个写过页面，但是对于js却一窍不通，零星的几个全栈工程师，也不知道什么原因被领导拒绝了。于是乎就有了将公司业务进行前后端分离的计划。
+	</p>
+	<p class="text-right">
+		<a class="btn" href="/2019/12/19/webpack/">more »</a>
+	</p>
+
+	<h3>
+		<a class="text-muted" href="/2019/10/10/AutoGenerator/">myBaitsPlus代码生成器只生成指定类</a>
+	</h3>
+	<small>2019-10-10</small>
+	<p>
+		</p><p>myBaitsPlus的代码生成器使用比较简单，在<a href="https://mp.baomidou.com/guide/generator.html" target="_blank" rel="noopener">官方文档</a>里都有说明，并且还提供了例子。<br>根据例子，自己也写了一个代码生成类，随后发现了一个问题，这个会一次性生成controller、service、serviceImpl、mapper、mapperxml、entity。可是我不需要他生成controller，翻了翻官方文档并没有找到相应的提示，可能自己百度的方式不对，百度也没有给我答案，只能自己去查看源码了。<br>
+	</p>
+	<p class="text-right">
+		<a class="btn" href="/2019/10/10/AutoGenerator/">more »</a>
+	</p>
+
+	<h3>
+		<a class="text-muted" href="/2019/09/26/factory/">设计模式-工厂模式</a>
+	</h3>
+	<small>2019-09-26</small>
+	<p>
+		</p><p>对于设计模式，虽然在上大学的时候学过，但是一毕业，东西都还给了老师，脑海里只留下几丝印象。<br>在平时的工作中，我也会遇到一些对象名都是以Factory为结尾的，这就让我想起了工厂模式。工厂模式在java中也是一个常用的设计模式之一，觉得有必要对几个常用的设计模式进行下温习。<br>
+	</p>
+	<p class="text-right">
+		<a class="btn" href="/2019/09/26/factory/">more »</a>
+	</p>
+
+	<h3>
+		<a class="text-muted" href="/2019/09/15/源码-ArrayList/">源码-ArrayList</a>
+	</h3>
+	<small>2019-09-15</small>
+	<p>
+		</p><p>集合对于JAVA来说是一个非常基础也非常重要的东西，因为任何数据都需要存储。<br>而ArrayList,在我初入这行业时，只要用到集合数组第一时间就会想到它。在经历过过几年磨砺之后，ArrayList也不再是我唯一了解的集合了，但并不代表着用不到它，为了更好的运用各种集合，就有必要进行源码的阅读。<br>
+	</p>
+	<p class="text-right">
+		<a class="btn" href="/2019/09/15/源码-ArrayList/">more »</a>
+	</p>
+
+	<h3>
+		<a class="text-muted" href="/2019/05/06/webUploader常用功能/">webUploader常用功能</a>
+	</h3>
+	<small>2019-05-06</small>
+	<p>
+		</p><p>此前工作时，前端的图片上传样式一直有问题，加上前端人员无暇顾及，便在网上寻找一个合适的图片上传插件，最终发现了这款插件WebUploader，并且发现好几个游戏交易网站的图片上传插件也是这个，于是抽空学习记录了下。<br>
+	</p>
+	<p class="text-right">
+		<a class="btn" href="/2019/05/06/webUploader常用功能/">more »</a>
+	</p>
+
+
+	<nav class="page-nav">
+		<span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页&raquo;</a>
+	</nav>
+
+
+
+
+
+
+
+
+
+
+
+			</div>
+		</div>
+	</div>
+
+
+
+	<!-- <div class="container ">
 		<header class="header">
 	<div class="row clearfix">
 		<div class="col-md-2 column">
@@ -67,12 +203,12 @@
 			</div>
 			<ul class="nav nav-tabs">
 				
-					<li>
-						<a href="/archives">归档</a>
-					</li>
-				
 					<li class="active">
 						<a href="/">首页</a>
+					</li>
+				
+					<li>
+						<a href="/archives">归档</a>
 					</li>
 				
 			</ul>
@@ -207,7 +343,8 @@
 <div class="col-md-3 column">
 	</div>
 </div>
-	</div>
-	
-  </body>
+	</div> -->
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
 </html>

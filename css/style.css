@@ -1,3 +1,146 @@
+a {
+  color: #606975;
+}
+body::before {
+  background-repeat: no-repeat;
+  background-position: 50%;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.08;
+  position: fixed;
+  background: 50%/cover no-repeat;
+  background-image: url("https://xiaoguaiblog.oss-cn-shanghai.aliyuncs.com/mylife/24b80433-849c-4e75-a32c-160b2c814751.jpg");
+}
+@-webkit-keyframes fadein-right {
+  from {
+    opacity: 0;
+    -webkit-transform: translateX(20px);
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateX(0px);
+    transform: translateX(0px);
+  }
+}
+@-moz-keyframes fadein-right {
+  from {
+    opacity: 0;
+    -webkit-transform: translateX(20px);
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateX(0px);
+    transform: translateX(0px);
+  }
+}
+@-webkit-keyframes fadein-right {
+  from {
+    opacity: 0;
+    -webkit-transform: translateX(20px);
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateX(0px);
+    transform: translateX(0px);
+  }
+}
+@-o-keyframes fadein-right {
+  from {
+    opacity: 0;
+    -webkit-transform: translateX(20px);
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateX(0px);
+    transform: translateX(0px);
+  }
+}
+@keyframes fadein-right {
+  from {
+    opacity: 0;
+    -webkit-transform: translateX(20px);
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateX(0px);
+    transform: translateX(0px);
+  }
+}
+.side-container {
+  height: 100vh;
+  float: right;
+  position: fixed;
+  right: 0;
+  width: 29%;
+  padding-top: 40px;
+}
+.blog-title {
+  -webkit-writing-mode: vertical-lr;
+  -ms-writing-mode: tb-lr;
+  writing-mode: vertical-lr;
+  border-left: 2px solid;
+  text-align: left;
+  padding: 0 0 50px 0;
+  transition: padding 0.8s ease 0s, background 0.8s ease 0s;
+}
+.blog-title:hover {
+  padding: 15px 0 35px 0;
+  color: #fafafa !important;
+  background: #606975 !important;
+  border-left: solid #606975 2px;
+}
+.blog-title:hover * {
+  color: #fafafa !important;
+}
+.text_title {
+  margin-top: 0;
+  margin-left: 10px;
+  margin-right: 0;
+  font-size: 32px;
+  font-weight: bolder;
+}
+.text_subtitle {
+  margin-top: 0;
+  margin-left: 10px;
+  margin-right: 0;
+  font-size: 20px;
+  font-weight: bolder;
+  margin-right: 10px;
+}
+.fadeInRight {
+  -webkit-animation: fadein-right 1s ease-out;
+  animation: fadein-right 1s ease-out;
+}
+.blog-nav {
+  font-weight: bold;
+  font-style: normal;
+  margin: 0;
+  padding: 60px 0;
+  text-align: left;
+  position: fixed;
+  bottom: 20px;
+}
+.blog-nav ul {
+  list-style: none;
+  padding: 0;
+}
+.blog-nav ul li {
+  margin: 3px 0;
+}
+.blog-nav ul .active {
+  border-bottom: 2px solid #606975;
+}
 .header {
   padding-top: 24px;
   padding-bottom: 40px;
