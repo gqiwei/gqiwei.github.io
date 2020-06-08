@@ -1,6 +1,10 @@
 a {
   color: #606975;
 }
+a:hover,
+a:focus {
+  text-decoration: none;
+}
 body::before {
   background-repeat: no-repeat;
   background-position: 50%;
@@ -82,23 +86,24 @@ body::before {
   float: right;
   position: fixed;
   right: 0;
-  width: 29%;
+  width: 27%;
   padding-top: 40px;
 }
 .blog-title {
   -webkit-writing-mode: vertical-lr;
   -ms-writing-mode: tb-lr;
   writing-mode: vertical-lr;
-  border-left: 2px solid;
+  border-left: 2px solid #606975;
   text-align: left;
   padding: 0 0 50px 0;
   transition: padding 0.8s ease 0s, background 0.8s ease 0s;
+  cursor: pointer;
 }
 .blog-title:hover {
   padding: 15px 0 35px 0;
   color: #fafafa !important;
   background: #606975 !important;
-  border-left: solid #606975 2px;
+  border-left: 2px solid #606975;
 }
 .blog-title:hover * {
   color: #fafafa !important;
