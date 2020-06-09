@@ -143,8 +143,15 @@ body::before {
 .blog-nav ul li {
   margin: 3px 0;
 }
+.blog-nav ul li a i {
+  font-size: 17px;
+}
 .blog-nav ul .active {
   border-bottom: 2px solid #606975;
+}
+.blog-nav p {
+  font-weight: normal;
+  font-size: 12px;
 }
 .header {
   padding-top: 24px;
@@ -294,17 +301,25 @@ small {
 .archive {
   padding-left: 15px;
 }
+.archive .totle {
+  font-size: 17px;
+  font-weight: bold;
+}
+.archive h3 {
+  color: #606975;
+  font-weight: inherit;
+}
 .archive li {
-  margin-left: 1em;
-  font-size: 15px;
+  margin-left: 3em;
+  margin-top: 1em;
+  font-size: 16px;
   line-height: 1.6em;
+  list-style: none;
 }
 .archive li .title {
   color: #6e7173;
   text-decoration: none;
-}
-.archive .year {
-  font: bold 25px/1.1 "ff-tisa-web-pro", Cambria, "Times New Roman", Georgia, Times, sans-serif;
+  font-weight: bold;
 }
 .archive .post-date {
   display: inline-block;
