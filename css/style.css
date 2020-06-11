@@ -21,6 +21,14 @@ body::before {
   background: 50%/cover no-repeat;
   background-image: url("https://xiaoguaiblog.oss-cn-shanghai.aliyuncs.com/mylife/24b80433-849c-4e75-a32c-160b2c814751.jpg");
 }
+.main-container {
+  text-align: left;
+  margin: 0;
+  padding: 80px 40px;
+  overflow: hidden;
+  float: left;
+  padding-top: 40px;
+}
 .fadeInRight {
   -webkit-animation: fadein-right 1s ease-out;
   animation: fadein-right 1s ease-out;
@@ -217,6 +225,9 @@ body::before {
   font-weight: normal;
   font-size: 12px;
 }
+.blog-nav .tips p {
+  margin-bottom: 2px;
+}
 .tag-index {
   padding-left: 15px;
 }
@@ -271,20 +282,66 @@ small {
   padding-top: 46px;
 }
 .post .post-title {
-  font-size: 25px;
+  font-size: 17px;
   font-weight: bold;
+}
+.post a {
+  transition: color 0.3s ease 0s, background-color 0.3s ease 0s;
+  -moz-transition: color 0.3s ease 0s, background-color 0.3s ease 0s;
+  -o-transition: color 0.3s ease 0s, background-color 0.3s ease 0s;
+  -webkit-transition: color 0.3s ease 0s, background-color 0.3s ease 0s;
+  border-bottom: solid #98a3b1 1px;
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
+}
+.post a:hover {
+  color: #fafafa !important;
+  background-color: #898b90;
+  border-bottom: solid transparent 1px;
+}
+.post a:focus {
+  color: #1b1e21;
+}
+.post .post-ps {
+  color: #606975;
+}
+.post span {
+  margin-right: 10px;
+}
+.post span a {
+  border-bottom: solid #98a3b1 1px;
+  margin-right: 5px;
+}
+.post .one-title {
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: 0px;
+  color: #606975;
 }
 .post .post-meta {
   margin-top: 13px;
 }
+.post .post-content {
+  margin: 20px 0 0;
+  font-size: 17px;
+  line-height: 1.7em;
+  letter-spacing: 0.6px;
+  color: #606975;
+}
 .post .post-content h1 {
-  font-size: 22px;
+  font-size: 36px;
 }
 .post .post-content h2 {
-  font-size: 20px;
+  font-size: 30px;
 }
-.post .post-content h2 {
+.post .post-content h3 {
+  font-size: 24px;
+}
+.post .post-content h4 {
   font-size: 18px;
+}
+.post .post-content h5 {
+  font-size: 14px;
 }
 .post img {
   max-width: 100%;
@@ -378,6 +435,16 @@ small {
 }
 .post .highlight .line {
   height: 20px;
+}
+.post-list .list {
+  margin-bottom: 25px;
+}
+.post-list .post-content {
+  margin: 10px 0 0;
+  font-size: 17px;
+  line-height: 1.7em;
+  letter-spacing: 0.6px;
+  color: #606975;
 }
 .archive {
   padding-left: 15px;
