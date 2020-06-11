@@ -228,6 +228,46 @@ body::before {
 .blog-nav .tips p {
   margin-bottom: 2px;
 }
+@media (max-width: 768px) {
+  .side-container {
+    padding: 40px 30px 0 30px;
+    height: auto;
+    position: relative;
+    left: 0;
+    width: 100%;
+  }
+  .blog-title {
+    -webkit-writing-mode: inherit;
+    -ms-writing-mode: inherit;
+    padding: 0 0 0 0;
+    text-align: center;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    border-left: 0px solid #606975;
+    cursor: inherit;
+  }
+  .blog-title:hover {
+    color: #606975 !important;
+    background: transparent !important;
+    padding: 0;
+    border: none;
+  }
+  .blog-title:hover * {
+    color: #606975 !important;
+    background: transparent !important;
+  }
+  .blog-nav {
+    position: unset;
+    padding: 10px 0;
+    margin: 10px 0;
+    text-align: center;
+  }
+  .blog-nav ul li {
+    display: inline;
+    margin: 0 3px;
+    font-size: 16px;
+  }
+}
 .tag-index {
   padding-left: 15px;
 }
