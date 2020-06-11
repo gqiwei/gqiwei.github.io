@@ -16,45 +16,12 @@
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 	<script type="text/javascript">
-		 $(window).scroll(function(){
-				// console.log($(window).scrollTop());
-				if($(window).scrollTop()> 100 ){
-					$('#return-top').fadeIn(300);
-					}
-				 else{$('#return-top').fadeOut(200);}
-					 })
-
-
-		// 点击按钮，使得页面返回顶部
-		$("#return-top").click(function(){
-			$('body,html').animate({scrollTop:0},300);
-		});
-		// 鼠标悬浮按钮之上，图片消失，文字显示
-		$(".top_e").mouseover(function(){
-			$("#img").hide();
-			$("#font").show();
-		})
-		//鼠标离开，文字消失，图片显示。
-		$(".top_e").mouseout(function(){
-			$("#font").hide();
-			$("#img").show();
-		})
-		
-		function toTop(){
-			$('body,html').animate({scrollTop:0},400);
-		}
-
-
 		$(document).ready(function() {
-			var $arContent = $('.post-content');
-			$arContentAnchor = $arContent.find('.headerlink');
-			$("#article-toc").find('a').each(function(i){
-				var $this = $(this);
-				$this.click(function(e){
-					e.preventDefault();
-					$('html,body').animate({ scrollTop: $arContentAnchor.eq(i).offset().top - 40}, 400, 'swing');
-				});
-			});
+			if(window.innerWidth <= 768){
+				$(".side-container").addClass("fadeInTop");
+			}else{
+				$(".side-container").addClass("fadeInRight");
+			}
 		});
 	</script>
 </head>
@@ -64,7 +31,7 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-3 side-container fadeInRight">
+			<div class="col-sm-3 side-container ">
 				<div class="blog-title">
     <h1 style class="text_title">
         <a href="/" class="co">我是小怪</a>
@@ -94,7 +61,7 @@
             </li>
         
       
-        <li>
+        <li class="icon">
             <a href="https://github.com/gqiwei" target="_blank"><i class="fa fa-github">&nbsp;</i></a>
         </li>
     </ul>
@@ -106,7 +73,7 @@
 
 
 			</div>
-			<div class="col-sm-9 main-container fadeInTop" style="">
+			<div class="col-sm-9 main-container fadeInTop" >
 				<section class="category archive">
 
     <div class="totle"><a>分类 笔记</a></div>
@@ -166,12 +133,21 @@
 
 
 </section>
+
+				
+
+<div class="footer">
+	<div class="tips">
+        <p><span>Theme <b><a href="http://hexo.io" target="_blank">Guai</a></b></span></p>
+        <p><span>Powered by <b><a href="http://hexo.io" target="_blank">Hexo</a></b></span></p>
+    </div>
+</div>
 			</div>
 		</div>
 	</div>
 
 
-
+	
 
 <script src="/live2d_models/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2d_models/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2d_models/assets/Bronya.model.json"},"display":{"position":"right","width":290,"height":350},"mobile":{"show":false},"react":{"opacity":0.7},"log":false});</script></body>
 

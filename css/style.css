@@ -29,6 +29,15 @@ body::before {
   float: left;
   padding-top: 40px;
 }
+.footer {
+  text-align: center;
+  margin-top: 30px;
+  display: none;
+}
+.footer p {
+  font-size: 12px;
+  margin-bottom: 4px;
+}
 .fadeInRight {
   -webkit-animation: fadein-right 1s ease-out;
   animation: fadein-right 1s ease-out;
@@ -227,10 +236,11 @@ body::before {
 }
 .blog-nav .tips p {
   margin-bottom: 2px;
+  font-size: 12px;
 }
 @media (max-width: 768px) {
   .side-container {
-    padding: 40px 30px 0 30px;
+    padding: 25px 30px 0 30px;
     height: auto;
     position: relative;
     left: 0;
@@ -258,14 +268,28 @@ body::before {
   }
   .blog-nav {
     position: unset;
-    padding: 10px 0;
-    margin: 10px 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
     text-align: center;
+  }
+  .blog-nav .tips {
+    display: none;
   }
   .blog-nav ul li {
     display: inline;
     margin: 0 3px;
     font-size: 16px;
+  }
+  .icon {
+    display: block !important;
+    padding-top: 10px;
+  }
+  .main-container {
+    padding: 4px 16px;
+    float: inherit;
+  }
+  .footer {
+    display: block;
   }
 }
 .tag-index {
