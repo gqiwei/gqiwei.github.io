@@ -38,6 +38,18 @@ body::before {
   font-size: 12px;
   margin-bottom: 4px;
 }
+html::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+html::-webkit-scrollbar-thumb {
+  height: 40px;
+  background-color: #eee;
+  border-radius: 16px;
+}
+html::-webkit-scrollbar-thumb:hover {
+  background-color: #ddd;
+}
 .fadeInRight {
   -webkit-animation: fadein-right 1s ease-out;
   animation: fadein-right 1s ease-out;
