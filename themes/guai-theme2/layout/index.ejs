@@ -1,0 +1,22 @@
+<% page.posts.each(function (post) { %>
+	<h3>
+		<a class="text-muted" href="<%- url_for(post.path) %>"><%= post.title %></a>
+	</h3>
+	<small><%- date(post.date, "YYYY-MM-DD") %></small>
+	<p>
+		<%- post.excerpt %>
+	</p>
+	<p class="text-right">
+		<a class="btn" href="<%- url_for(post.path) %>">more »</a>
+	</p>
+<% }) %>
+<%- partial('_partial/paginator') %>
+
+
+
+
+
+
+
+
+

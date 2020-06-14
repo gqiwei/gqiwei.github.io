@@ -1,4 +1,6 @@
 menu:
-  Archives: /archives
   Home: /
+  Archives: /archives
+  tags: /tags
+  categories: /categories
   

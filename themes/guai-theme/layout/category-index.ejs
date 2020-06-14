@@ -1,0 +1,18 @@
+<section class="tag-index">
+    <div class="name"><a>分类</a></div>
+    
+    <ul>
+        <% site.categories.each(function(post, i){ %>
+        
+            <li>
+                <a class="title" href="/categories<%= url_for(post.name) %>"><%= post.name %></a> |  <a><%= post.posts.length %> 篇</a>
+            </li>
+            
+          
+      <% }) %>
+    </ul>
+    
+    
+
+    
+    </section>

@@ -3,7 +3,7 @@ title: liunx配置jdk，mysql傻瓜式流程
 categories:
   - 笔记
 tags:
-  - liunx
+  - linux
 date: 2020-01-03 14:17:27
 ---
 

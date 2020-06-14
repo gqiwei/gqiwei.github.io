@@ -1,6 +1,8 @@
 Menu:
   Home: 首页
   Archives: 归档
+  categories: 分类
+  tags: 标签
   Github: 交友
 
 Paginator:

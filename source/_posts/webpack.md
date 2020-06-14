@@ -22,7 +22,7 @@ date: 2019-12-19 00:12:05
 # 开始
 ## 初始化项目
 创建一个空文件夹，然后进入并打开Git Bash。
-输入`npm init`。会出现如下提示，不用在意，狂按回车即刻。
+输入`npm init`。会出现如下提示，不用在意，狂按回车即可。
 ![](https://xiaoguaiblog.oss-cn-shanghai.aliyuncs.com/%E5%B0%8F%E6%80%AA%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/webpack%E7%AC%94%E8%AE%B0/1.png)  
 之后会生成一个package.json的文件，类似于java中maven的pom.xml，进行依赖包管理。
 ## 安装cnpm

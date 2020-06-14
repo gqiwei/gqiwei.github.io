@@ -1,0 +1,155 @@
+.side-container {
+  height: 100vh;
+  float: right;
+  position: fixed;
+  right: 0;
+  width: 27%;
+  padding-top: 40px;
+}
+
+.blog-title {
+  -webkit-writing-mode: vertical-lr;
+  -ms-writing-mode: tb-lr;
+  writing-mode: vertical-lr;
+  border-left: 2px solid #606975 
+  text-align: left;
+  padding: 0 0 50px 0;
+  transition: padding .8s ease 0s, background .8s ease 0s;
+  cursor:pointer;
+}
+
+.blog-title:hover {
+    padding: 15px 0 35px 0;
+    color: #fafafa !important;
+    background: #606975 !important;
+    border-left: 2px solid #606975 
+}
+
+.blog-title:hover * {
+    color: #fafafa !important
+}
+
+.text_title {
+  margin-top: 0;
+  margin-left: 10px;
+  margin-right: 0;
+  font-size: 32px;
+  font-weight: bolder;
+}
+.text_subtitle {
+  margin-top: 0;
+  margin-left: 10px;
+  margin-right: 0;
+  font-size: 20px;
+  font-weight: bolder;
+  margin-right: 10px;
+}
+
+
+
+
+.blog-nav{
+    font-weight: bold;
+    font-style: normal;
+    margin: 0;
+    padding: 60px 0;
+    text-align: left;
+    position: fixed;
+    bottom: 20px;
+
+    ul{
+        list-style: none;
+        padding: 0;
+
+        li{
+            margin: 3px 0;
+            a{
+              i{
+                  font-size: 17px;
+              }
+            }
+        }
+        .active{
+            border-bottom: 2px solid #606975
+        }
+        
+    }
+
+    p{
+      font-weight: normal;
+      font-size: 12px;
+    }
+    
+    .tips{
+      p{
+        margin-bottom: 2px;
+        font-size: 12px;
+      }  
+    }
+}
+
+
+
+@media (max-width: 768px){
+  .side-container {
+      padding: 25px 30px 0 30px;
+      height: auto;
+      position: relative;
+      left: 0
+      width:100%
+  }
+
+  .blog-title {
+    -webkit-writing-mode: inherit;
+    -ms-writing-mode:inherit;
+    padding: 0 0 0 0;
+    text-align: center;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    border-left: 0px solid #606975;
+    cursor: inherit;
+  }
+
+  .blog-title:hover {
+    color: #606975 !important;
+    background: transparent !important;
+    padding: 0;
+    border: none
+  }
+  .blog-title:hover * {
+    color: #606975 !important;
+    background: transparent !important
+  }
+
+
+  .blog-nav {
+    position: unset;
+    padding-top: 10px;
+    padding-bottom: 10px ;
+    text-align: center
+
+    .tips{
+      display :none
+    }
+  }
+  .blog-nav ul li {
+    display: inline;
+    margin: 0 3px;
+    font-size: 16px
+  }
+
+  .icon{
+    display: block !important;
+    padding-top:10px;
+  }
+
+  .main-container{
+    padding: 4px 16px;
+    float:inherit
+  }
+
+
+  .footer{
+    display: block  
+  }
+}

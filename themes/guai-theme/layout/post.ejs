@@ -1,14 +1,18 @@
-<div class="post">
-	<span class="post-title"><%= page.title %></span>
-	 <div class="post-meta">
-		<span class="post-time text-muted">写于<%- date(page.date, "YYYY年MM月DD日") %></span>
-	  </div>
-	  <br>
-	  <br>
+<section class="post">
+	<h1 class="one-title">
+		<%= page.title %>
+	</h1>
+	<p class="post-ps">
+		<span>发布于 <%- date(page.date, "YYYY-MM-DD") %></span>
+		
+		<%- partial('_partial/tags',{tags:page.categories,icon:"fa-folder",url:"categories"}) %>
+		<%- partial('_partial/tags',{tags:page.tags,icon:"fa-tag",url:"tags"}) %>
+	</p>
+	
 	  <div class="post-content">
 		<%- page.content %>
 	  </div>
-</div>
+</section>
 
 
 

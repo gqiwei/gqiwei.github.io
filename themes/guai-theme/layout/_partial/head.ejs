@@ -1,42 +1,51 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-  <title><%= config.title %></title>
+  <%
+	var description ="123";
+	if(is_home()){
+		description = config.description;
+	}else{
+		description = page.description;
+	}
 
-	<%- css('css/style.css') %>
-    <%- css('css/bootstrap.css') %>
+  %>
+  <meta name="description" content="<%= description %>">
+  <meta name="keywords" content="’‘">
+  <%
+	var title;
+	if(is_home()){
+		title = "小怪";
+	}else if(is_archive()){
+		title = "归档-小怪";
+	}else if(is_tag()){
+		title = "标签-小怪";
+	}else if(is_category()){
+		title = "分类-小怪";
+	}else{
+		title = page.title
+	}
+
+  %>
+  <title><%= title %> </title>
+
+	  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+	  <%- css('css/style.css') %>
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
 	<script type="text/javascript">
-		 $(window).scroll(function(){
-				console.log($(window).scrollTop());
-				if($(window).scrollTop()> 100 ){
-					$('#return-top').fadeIn(300);
-					}
-				 else{$('#return-top').fadeOut(200);}
-					 })
+		$(document).ready(function() {
+			if(window.innerWidth <= 768){
+				$(".side-container").addClass("fadeInTop");
+			}else{
+				$(".side-container").addClass("fadeInRight");
+			}
 
-
-		// 点击按钮，使得页面返回顶部
-		$("#return-top").click(function(){
-			$('body,html').animate({scrollTop:0},300);
+			$(".blog-title").click(function() {
+            	$(".blog-title a")[0].click();
+        	});
 		});
-		// 鼠标悬浮按钮之上，图片消失，文字显示
-		$(".top_e").mouseover(function(){
-			$("#img").hide();
-			$("#font").show();
-		})
-		//鼠标离开，文字消失，图片显示。
-		$(".top_e").mouseout(function(){
-			$("#font").hide();
-			$("#img").show();
-		})
-		
-		function toTop(){
-			$('body,html').animate({scrollTop:0},500);
-		}
-		
 	</script>
 </head>

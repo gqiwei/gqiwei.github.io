@@ -1,0 +1,6 @@
+<span>
+    <i class="fa <%= icon %>"></i>
+    <% tags.each(function(p, i){ %>
+        <a href="/<%= url %><%= url_for(p.name) %>"><%= p.name %></a>
+    <% }) %>
+</span>

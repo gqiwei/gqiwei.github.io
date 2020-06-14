@@ -1,0 +1,124 @@
+a {
+  color: #606975;
+}
+a:hover, a:focus {
+    text-decoration: none
+}
+
+
+body::before {
+  background-repeat: no-repeat;
+  background-position: 50%;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.08;
+  position: fixed;
+  background: 50% / cover no-repeat;
+  background-image: url(https://xiaoguaiblog.oss-cn-shanghai.aliyuncs.com/mylife/24b80433-849c-4e75-a32c-160b2c814751.jpg);
+}
+
+.main-container{
+    text-align: left;
+    margin: 0;
+    padding: 80px 40px;
+    overflow: hidden;
+    float: left;
+    padding-top: 40px;
+}
+
+.footer{
+    text-align: center;
+    margin-top:30px;
+    display: none;
+    p{
+        font-size: 12px;
+        margin-bottom: 4px;
+    }
+}
+
+
+html::-webkit-scrollbar {
+    width: 8px;
+    height: 8px
+}
+
+html::-webkit-scrollbar-thumb {
+    height: 40px;
+    
+    background: #bbbbbb;
+    border-radius: 16px
+}
+
+html::-webkit-scrollbar-thumb:hover {
+    background: #fff;
+}
+
+
+
+.fadeInRight {
+    -webkit-animation: fadein-right 1s ease-out;
+    animation: fadein-right 1s ease-out
+}
+
+@keyframes fadein-right {
+    from {
+        opacity: 0;
+        -webkit-transform: translateX(20px);
+        transform: translateX(20px)
+    }
+    to {
+        opacity: 1;
+        -webkit-transform: translateX(0px);
+        transform: translateX(0px)
+    }
+}
+
+@-webkit-keyframes fadein-right {
+    from {
+        opacity: 0;
+        -webkit-transform: translateX(20px);
+        transform: translateX(20px)
+    }
+    to {
+        opacity: 1;
+        -webkit-transform: translateX(0px);
+        transform: translateX(0px)
+    }
+}
+
+.fadeInTop {
+    -webkit-animation: fadein-top 1s ease-out;
+    animation: fadein-top 1s ease-out
+}
+
+@keyframes fadein-top {
+    from {
+        opacity: 0;
+        -webkit-transform: translateY(-20px);
+        transform: translateY(-20px)
+    }
+    to {
+        opacity: 1;
+        -webkit-transform: translateY(0px);
+        transform: translateY(0px)
+    }
+}
+
+@-webkit-keyframes fadein-top {
+    from {
+        opacity: 0;
+        -webkit-transform: translateY(-20px);
+        transform: translateY(-20px)
+    }
+    to {
+        opacity: 1;
+        -webkit-transform: translateY(0px);
+        transform: translateY(0px)
+    }
+}

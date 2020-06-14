@@ -1,16 +1,25 @@
-<% page.posts.each(function (post) { %>
-	<h3>
-		<a class="text-muted" href="<%- url_for(post.path) %>"><%= post.title %></a>
-	</h3>
-	<small><%- date(post.date, "YYYY-MM-DD") %></small>
-	<p>
-		<%- post.excerpt %>
-	</p>
-	<p class="text-right">
-		<a class="btn" href="<%- url_for(post.path) %>">more »</a>
-	</p>
-<% }) %>
-<%- partial('_partial/paginator') %>
+<section class="post post-list">
+	<% page.posts.each(function (post) { %>
+		<div class="list">
+			<p class="post-title">
+				<a href="<%- url_for(post.path) %>"><%= post.title %></a>
+			</p>
+			<p class="post-ps">
+				<span>发布于 <%- date(post.date, "YYYY-MM-DD") %></span>
+				
+				<%- partial('_partial/tags',{tags:post.categories,icon:"fa-folder",url:"categories"}) %>
+				<%- partial('_partial/tags',{tags:post.tags,icon:"fa-tag",url:"tags"}) %>
+			</p>
+			
+			<div class="post-content">
+				<%- strip_html(post.content).substring(0,120) %> ......
+			</div>
+		</div>
+	<% }) %>
+	<%- partial('_partial/paginator') %>
+	
+</section>
+
 
 
 

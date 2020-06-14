@@ -5,7 +5,7 @@
 # Site
 title: XiaoGuai's blog
 subtitle: Guo
-description:
+description: XiaoGuai's blog
 keywords:
 author: Qiwei Guo
 language: zh-CN
@@ -35,7 +35,7 @@ titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab
 filename_case: 0
 render_drafts: false
-post_asset_folder: true
+post_asset_folder: false
 relative_link: false
 future: true
 highlight:
@@ -79,5 +79,25 @@ theme: guai-theme
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/gqiwei/gqiwei.github.io.git
-  branch: master
+  repo: 
+    github: https://github.com/gqiwei/gqiwei.github.io.git,master
+    coding: git@e.coding.net:oneguai/gqiwei.git,master
+
+live2d:
+  enable: true
+  scriptFrom: local
+  pluginRootPath: live2d_models/
+  pluginJsPath: lib/
+  pluginModelPath: assets/
+  tagMode: false
+  debug: false
+  model:
+    use: Bronya
+  display:
+    position: right
+    width: 290
+    height: 350
+  mobile:
+    show: false
+  react:
+    opacity: 0.7
