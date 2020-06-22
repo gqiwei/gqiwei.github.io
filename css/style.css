@@ -381,10 +381,10 @@ small {
 .post .post-ps {
   color: #606975;
 }
-.post span {
+.post .post-ps span {
   margin-right: 10px;
 }
-.post span a {
+.post .post-ps span a {
   border-bottom: solid #98a3b1 1px;
   margin-right: 5px;
 }
