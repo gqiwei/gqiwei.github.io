@@ -47,9 +47,6 @@ html::-webkit-scrollbar-thumb {
   background: #bbb;
   border-radius: 16px;
 }
-html::-webkit-scrollbar-thumb:hover {
-  background: #fff;
-}
 .fadeInRight {
   -webkit-animation: fadein-right 1s ease-out;
   animation: fadein-right 1s ease-out;
