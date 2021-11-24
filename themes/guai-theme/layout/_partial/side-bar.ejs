@@ -20,6 +20,8 @@
                     class="active" 
                 <% }else if(url_for(theme.menu[name])=='/categories'&&is_current('categories/')) {%> 
                     class="active" 
+                <% }else if(url_for(theme.menu[name])=='/about'&&is_current('about/')) {%> 
+                    class="active" 
                 <% } %> 
                
                  href="<%- url_for(theme.menu[name]) %>"><%- __('Menu.' + name) %></a>
