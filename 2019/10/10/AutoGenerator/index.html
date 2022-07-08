@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  
+  <meta name="description" content>
+  <meta name="keywords" content="’‘">
+  
+  <title>myBaitsPlus代码生成器只生成指定类 </title>
+  <link rel="Shortcut Icon" href="/icon/guai.ico" type="image/x-icon">
+	  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+	  <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			if(window.innerWidth <= 768){
+				$(".side-container").addClass("fadeInTop");
+			}else{
+				$(".side-container").addClass("fadeInRight");
+			}
+
+			$(".blog-title").click(function() {
+            	$(".blog-title a")[0].click();
+        	});
+		});
+	</script>
+</head>
+
+<body>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3 side-container ">
+				<div class="blog-title">
+    <h1 style class="text_title">
+        <a href="/" class="co">我是小怪</a>
+    </h1>
+    <h3 class="text_subtitle">
+        <a href="/" class="co">人生，只不过是回忆往昔</a>
+    </h3>
+</div>
+
+<div class="blog-nav">
+    <ul>
+        
+            <li>
+                <a href="/">首页</a>
+            </li>
+        
+            <li>
+                <a href="/archives">归档</a>
+            </li>
+        
+            <li>
+                <a href="/tags">标签</a>
+            </li>
+        
+            <li>
+                <a href="/categories">分类</a>
+            </li>
+        
+            <li>
+                <a href="/about">关于</a>
+            </li>
+        
+      
+        <li class="icon">
+            <a href="https://github.com/gqiwei" target="_blank"><i class="fa fa-github">&nbsp;</i></a>
+        </li>
+    </ul>
+    <div class="tips">
+        <p><span>Theme <b><a href="http://hexo.io" target="_blank">Guai</a></b></span></p>
+        <p><span>Powered by <b><a href="http://hexo.io" target="_blank">Hexo</a></b></span></p>
+    </div>
+</div>
+
+
+			</div>
+			<div class="col-sm-9 main-container fadeInTop" >
+				<section class="post">
+	<h1 class="one-title">
+		myBaitsPlus代码生成器只生成指定类
+	</h1>
+	<p class="post-ps">
+		<span>发布于 2019-10-10</span>
+		<span>修改于 2019-10-10</span>
+		<span>
+    <i class="fa fa-folder"></i>
+    
+        <a href="/categories/源码">源码</a>
+    
+</span>
+		<span>
+    <i class="fa fa-tag"></i>
+    
+        <a href="/tags/java">java</a>
+    
+        <a href="/tags/mybatis">mybatis</a>
+    
+        <a href="/tags/笔记">笔记</a>
+    
+</span>
+	</p>
+	
+	  <div class="post-content">
+		<p>myBaitsPlus的代码生成器使用比较简单，在<a href="https://mp.baomidou.com/guide/generator.html" target="_blank" rel="noopener">官方文档</a>里都有说明，并且还提供了例子。<br>根据例子，自己也写了一个代码生成类，随后发现了一个问题，这个会一次性生成controller、service、serviceImpl、mapper、mapperxml、entity。可是我不需要他生成controller，翻了翻官方文档并没有找到相应的提示，可能自己百度的方式不对，百度也没有给我答案，只能自己去查看源码了。<br><a id="more"></a><br>首先是我自己写的类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Generator</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        AutoGenerator generator = <span class="keyword">new</span> AutoGenerator();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 全局配置</span></span><br><span class="line">        GlobalConfig globalConfig = <span class="keyword">new</span> GlobalConfig();</span><br><span class="line">        globalConfig.setOutputDir(System.getProperty(<span class="string">"user.dir"</span>) + <span class="string">"/src/main/java"</span>); <span class="comment">//生成文件的输出目录</span></span><br><span class="line">        globalConfig.setFileOverride(<span class="keyword">true</span>);<span class="comment">//是否覆盖已有文件</span></span><br><span class="line">        globalConfig.setAuthor(<span class="string">"gqw"</span>);<span class="comment">//开发人员</span></span><br><span class="line">        globalConfig.setSwagger2(<span class="keyword">true</span>);<span class="comment">//开启 swagger2 模式</span></span><br><span class="line">        globalConfig.setEntityName(<span class="string">"%sDO"</span>);<span class="comment">//实体命名方式</span></span><br><span class="line">        globalConfig.setMapperName(<span class="string">"%sDAO"</span>);<span class="comment">//mapper 命名方式</span></span><br><span class="line">        globalConfig.setXmlName(<span class="string">"%sMapper"</span>);<span class="comment">//Mapper xml 命名方式</span></span><br><span class="line"></span><br><span class="line">        generator.setGlobalConfig(globalConfig);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 数据源配置</span></span><br><span class="line">        DataSourceConfig dsc = <span class="keyword">new</span> DataSourceConfig();</span><br><span class="line">        dsc.setUrl(<span class="string">"jdbc:mysql://10.0.1.15:3306/dawngamegxyd?useUnicode=true&amp;serverTimezone=GMT&amp;useSSL=false&amp;characterEncoding=utf8"</span>);</span><br><span class="line">        dsc.setDriverName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">        dsc.setUsername(<span class="string">"admin"</span>);</span><br><span class="line">        dsc.setPassword(<span class="string">"admin123"</span>);</span><br><span class="line"></span><br><span class="line">        generator.setDataSource(dsc);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 包配置</span></span><br><span class="line">        PackageConfig pc = <span class="keyword">new</span> PackageConfig();</span><br><span class="line">        pc.setModuleName(<span class="string">"test"</span>);<span class="comment">//父包模块名</span></span><br><span class="line">        pc.setParent(<span class="string">"com.li.springbootthymeleaf"</span>);<span class="comment">//父包名</span></span><br><span class="line">        pc.setEntity(<span class="string">"domain"</span>);<span class="comment">//Entity包名</span></span><br><span class="line">        pc.setMapper(<span class="string">"dao"</span>);<span class="comment">//Mapper包名</span></span><br><span class="line">        pc.setXml(<span class="string">"mapper"</span>);<span class="comment">//Mapper XML包名</span></span><br><span class="line"></span><br><span class="line">        generator.setPackageInfo(pc);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 数据库表配置</span></span><br><span class="line">        StrategyConfig strategy = <span class="keyword">new</span> StrategyConfig();</span><br><span class="line"></span><br><span class="line">        strategy.setNaming(NamingStrategy.underline_to_camel);<span class="comment">//数据库表映射到实体的命名策略</span></span><br><span class="line">        strategy.setColumnNaming(NamingStrategy.underline_to_camel);<span class="comment">//数据库表字段映射到实体的命名策略, 未指定按照 naming 执行</span></span><br><span class="line">        strategy.setTablePrefix(pc.getModuleName() + <span class="string">"_"</span>);<span class="comment">//表前缀</span></span><br><span class="line"></span><br><span class="line">        strategy.setInclude(<span class="string">"edu_game"</span>);<span class="comment">//需要包含的表名，允许正则表达式（与exclude二选一配置）</span></span><br><span class="line"><span class="comment">//        strategy.setExclude("");//需要排除的表名，允许正则表达式</span></span><br><span class="line">        strategy.setEntityLombokModel(<span class="keyword">true</span>);<span class="comment">//【实体】是否为lombok模型（默认 false）</span></span><br><span class="line">        strategy.setControllerMappingHyphenStyle(<span class="keyword">true</span>);<span class="comment">//驼峰转连字符</span></span><br><span class="line"></span><br><span class="line">        generator.setStrategy(strategy);</span><br><span class="line"></span><br><span class="line">        generator.execute();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>大部分都是配置，只有最后一行generator.execute()进入代码的生成。<br>进入这个方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    logger.debug(<span class="string">"==========================准备生成文件...=========================="</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">null</span> == <span class="keyword">this</span>.config) &#123;</span><br><span class="line">        <span class="keyword">this</span>.config = <span class="keyword">new</span> ConfigBuilder(<span class="keyword">this</span>.packageInfo, <span class="keyword">this</span>.dataSource, <span class="keyword">this</span>.strategy, <span class="keyword">this</span>.template, <span class="keyword">this</span>.globalConfig);</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> != <span class="keyword">this</span>.injectionConfig) &#123;</span><br><span class="line">            <span class="keyword">this</span>.injectionConfig.setConfig(<span class="keyword">this</span>.config);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">null</span> == <span class="keyword">this</span>.templateEngine) &#123;</span><br><span class="line">        <span class="keyword">this</span>.templateEngine = <span class="keyword">new</span> VelocityTemplateEngine();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>.templateEngine.init(<span class="keyword">this</span>.pretreatmentConfigBuilder(<span class="keyword">this</span>.config)).mkdirs().batchOutput().open();</span><br><span class="line">    logger.debug(<span class="string">"==========================文件生成完成！！！=========================="</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>config为之前写的各种配置。而生成文件的代码在<code>batchOutput()</code>中。<br>进入<code>batchOutput()</code>会发现有那么几行类似的代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">null</span> != tableInfo.getControllerName() &amp;&amp; <span class="keyword">null</span> != pathInfo.get(<span class="string">"controller_path"</span>)) &#123;</span><br><span class="line">    controllerFile = String.format((String)pathInfo.get(<span class="string">"controller_path"</span>) + File.separator + tableInfo.getControllerName() + <span class="keyword">this</span>.suffixJavaOrKt(), entityName);</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.isCreate(FileType.CONTROLLER, controllerFile)) &#123;</span><br><span class="line">        <span class="keyword">this</span>.writer(objectMap, <span class="keyword">this</span>.templateFilePath(template.getController()), controllerFile);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这就是用来生成文件的代码。<br>从明面上看只要if中的条件为fasle就不会生成了,那么就要去看if中的条件中的参数是从哪里来的。<br>首先是tableInfo.getControllerName()。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">TableInfo tableInfo = (TableInfo)var2.next();</span><br><span class="line"></span><br><span class="line">Iterator var2 = tableInfoList.iterator();</span><br><span class="line"></span><br><span class="line">List&lt;TableInfo&gt; tableInfoList = <span class="keyword">this</span>.getConfigBuilder().getTableInfoList();</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ConfigBuilder <span class="title">getConfigBuilder</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.configBuilder;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以要看看configBuilder是从哪里来的。<br>一步一步逆推上去。在AutoGenerator.execute()，也就是上面的execute()方法中， 有个templateEngine.init()<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> AbstractTemplateEngine <span class="title">init</span><span class="params">(ConfigBuilder configBuilder)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.configBuilder = configBuilder;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接下来就要看this.pretreatmentConfigBuilder(this.config)，这个东西就是configBuilder 。<br>进入pretreatmentConfigBuilder方法,结合debug，发现<br><img src="/2019/10/10/AutoGenerator/1.png" alt><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> List&lt;TableInfo&gt; <span class="title">getAllTableInfoList</span><span class="params">(ConfigBuilder config)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> config.getTableInfoList();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们想要的controllerName早就存在于ConfigBuilder中。故我们直接去看看ConfigBuilder是怎么产生的。也就是AutoGenerator.execute()中的<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.config = <span class="keyword">new</span> ConfigBuilder(<span class="keyword">this</span>.packageInfo, <span class="keyword">this</span>.dataSource, <span class="keyword">this</span>.strategy, <span class="keyword">this</span>.template, <span class="keyword">this</span>.globalConfig);</span><br></pre></td></tr></table></figure></p>
+<p>进入ConfigBuilder的构造函数,发现大部分都是对我们之前写的配置进行设置。<br>结合debug，<code>tableInfoList</code>在<code>this.handlerStrategy(this.strategyConfig);</code>中生成<br>点进方法里，有一个<code>this.tableInfoList = this.getTablesInfo(config);</code><br>继续点进去。<br>有一长段的代码，但是在debug中看下来，这些是去循环记录了你数据库里的表。最终有用的还是得看最后的<code>this.processTable(includeTableList, config.getNaming(), config);</code><br>在<code>processTable()</code>方法中，我们可以看到<code>tableInfo.setControllerName</code><br>这就很明显了。<code>controllerName</code>就是在这里设置的，但是<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (StringUtils.isNotEmpty(<span class="keyword">this</span>.globalConfig.getControllerName())) &#123;</span><br><span class="line">    tableInfo.setControllerName(String.format(<span class="keyword">this</span>.globalConfig.getControllerName(), entityName));</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    tableInfo.setControllerName(entityName + <span class="string">"Controller"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里面是一个if else语句，等于说不管怎样，controllerName都不会为空，<code>tableInfo.getControllerName()</code>这条路走不通了，那只能换一条<code>pathInfo.get(&quot;controller_path&quot;)</code>路走了。<br><code>pathInfo</code>也是<code>ConfigBuilder</code>中的，直接去看<code>ConfigBuilder</code>构造方法。<br>可以明显的看出<code>pathInfo</code>在构造方法中的<code>handlerPackage()</code>产生。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">handlerPackage</span><span class="params">(TemplateConfig template, String outputDir, PackageConfig config)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.packageInfo = <span class="keyword">new</span> HashMap(<span class="number">8</span>);</span><br><span class="line">    <span class="keyword">this</span>.packageInfo.put(<span class="string">"ModuleName"</span>, config.getModuleName());</span><br><span class="line">    <span class="keyword">this</span>.packageInfo.put(<span class="string">"Entity"</span>, <span class="keyword">this</span>.joinPackage(config.getParent(), config.getEntity()));</span><br><span class="line">    <span class="keyword">this</span>.packageInfo.put(<span class="string">"Mapper"</span>, <span class="keyword">this</span>.joinPackage(config.getParent(), config.getMapper()));</span><br><span class="line">    <span class="keyword">this</span>.packageInfo.put(<span class="string">"Xml"</span>, <span class="keyword">this</span>.joinPackage(config.getParent(), config.getXml()));</span><br><span class="line">    <span class="keyword">this</span>.packageInfo.put(<span class="string">"Service"</span>, <span class="keyword">this</span>.joinPackage(config.getParent(), config.getService()));</span><br><span class="line">    <span class="keyword">this</span>.packageInfo.put(<span class="string">"ServiceImpl"</span>, <span class="keyword">this</span>.joinPackage(config.getParent(), config.getServiceImpl()));</span><br><span class="line">    <span class="keyword">this</span>.packageInfo.put(<span class="string">"Controller"</span>, <span class="keyword">this</span>.joinPackage(config.getParent(), config.getController()));</span><br><span class="line">    Map&lt;String, String&gt; configPathInfo = config.getPathInfo();</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">null</span> != configPathInfo) &#123;</span><br><span class="line">        <span class="keyword">this</span>.pathInfo = configPathInfo;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.pathInfo = <span class="keyword">new</span> HashMap(<span class="number">6</span>);</span><br><span class="line">        <span class="keyword">this</span>.setPathInfo(<span class="keyword">this</span>.pathInfo, template.getEntity(<span class="keyword">this</span>.getGlobalConfig().isKotlin()), outputDir, <span class="string">"entity_path"</span>, <span class="string">"Entity"</span>);</span><br><span class="line">        <span class="keyword">this</span>.setPathInfo(<span class="keyword">this</span>.pathInfo, template.getMapper(), outputDir, <span class="string">"mapper_path"</span>, <span class="string">"Mapper"</span>);</span><br><span class="line">        <span class="keyword">this</span>.setPathInfo(<span class="keyword">this</span>.pathInfo, template.getXml(), outputDir, <span class="string">"xml_path"</span>, <span class="string">"Xml"</span>);</span><br><span class="line">        <span class="keyword">this</span>.setPathInfo(<span class="keyword">this</span>.pathInfo, template.getService(), outputDir, <span class="string">"service_path"</span>, <span class="string">"Service"</span>);</span><br><span class="line">        <span class="keyword">this</span>.setPathInfo(<span class="keyword">this</span>.pathInfo, template.getServiceImpl(), outputDir, <span class="string">"service_impl_path"</span>, <span class="string">"ServiceImpl"</span>);</span><br><span class="line">        <span class="keyword">this</span>.setPathInfo(<span class="keyword">this</span>.pathInfo, template.getController(), outputDir, <span class="string">"controller_path"</span>, <span class="string">"Controller"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>debug发现，config.getPathInfo()为null。接下来就需要去看看这个东西可以在那里赋值。这里的config是PackageConfig，这就很明显了，就是我们自己的包配置PackageConfig。<br>随后在我们的包配置里多增加一条配置，<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String,String&gt; pathInfo=<span class="keyword">new</span> HashMap&lt;String,String&gt;();</span><br><span class="line">pathInfo.put(<span class="string">"entity_path"</span>,globalConfig.getOutputDir()+<span class="string">"/"</span>+pc.getParent().replaceAll(<span class="string">"\\."</span>,<span class="string">"/"</span>)+<span class="string">"/"</span>+pc.getEntity().replaceAll(<span class="string">"\\."</span>,<span class="string">"/"</span>));<span class="comment">//需要把.替换成/</span></span><br><span class="line"><span class="comment">//        pathInfo.put("mapper_path","");</span></span><br><span class="line"><span class="comment">//        pathInfo.put("xml_path","");</span></span><br><span class="line">pc.setPathInfo(pathInfo);<span class="comment">//路径配置信息</span></span><br></pre></td></tr></table></figure></p>
+<p>执行后果然只有一个Entity类了。</p>
+
+	  </div>
+</section>
+
+
+
+
+
+  
+
+				
+
+<div class="footer">
+	<div class="tips">
+        <p><span>Theme <b><a href="http://hexo.io" target="_blank">Guai</a></b></span></p>
+        <p><span>Powered by <b><a href="http://hexo.io" target="_blank">Hexo</a></b></span></p>
+    </div>
+</div>
+			</div>
+		</div>
+	</div>
+
+
+	
+
+<script src="/live2d_models/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2d_models/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2d_models/assets/Bronya.model.json"},"display":{"position":"right","width":290,"height":350},"mobile":{"show":false},"react":{"opacity":0.7},"log":false});</script></body>
+
+</html>

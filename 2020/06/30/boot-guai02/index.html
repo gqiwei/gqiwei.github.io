@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  
+  <meta name="description" content="从零开始搭建后台管理系统(springboot,vue)">
+  <meta name="keywords" content="’‘">
+  
+  <title>从零开始的后台管理系统(1) </title>
+  <link rel="Shortcut Icon" href="/icon/guai.ico" type="image/x-icon">
+	  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+	  <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			if(window.innerWidth <= 768){
+				$(".side-container").addClass("fadeInTop");
+			}else{
+				$(".side-container").addClass("fadeInRight");
+			}
+
+			$(".blog-title").click(function() {
+            	$(".blog-title a")[0].click();
+        	});
+		});
+	</script>
+</head>
+
+<body>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3 side-container ">
+				<div class="blog-title">
+    <h1 style class="text_title">
+        <a href="/" class="co">我是小怪</a>
+    </h1>
+    <h3 class="text_subtitle">
+        <a href="/" class="co">人生，只不过是回忆往昔</a>
+    </h3>
+</div>
+
+<div class="blog-nav">
+    <ul>
+        
+            <li>
+                <a href="/">首页</a>
+            </li>
+        
+            <li>
+                <a href="/archives">归档</a>
+            </li>
+        
+            <li>
+                <a href="/tags">标签</a>
+            </li>
+        
+            <li>
+                <a href="/categories">分类</a>
+            </li>
+        
+            <li>
+                <a href="/about">关于</a>
+            </li>
+        
+      
+        <li class="icon">
+            <a href="https://github.com/gqiwei" target="_blank"><i class="fa fa-github">&nbsp;</i></a>
+        </li>
+    </ul>
+    <div class="tips">
+        <p><span>Theme <b><a href="http://hexo.io" target="_blank">Guai</a></b></span></p>
+        <p><span>Powered by <b><a href="http://hexo.io" target="_blank">Hexo</a></b></span></p>
+    </div>
+</div>
+
+
+			</div>
+			<div class="col-sm-9 main-container fadeInTop" >
+				<section class="post">
+	<h1 class="one-title">
+		从零开始的后台管理系统(1)
+	</h1>
+	<p class="post-ps">
+		<span>发布于 2020-06-30</span>
+		<span>修改于 2020-07-07</span>
+		<span>
+    <i class="fa fa-folder"></i>
+    
+        <a href="/categories/从零开始的后台管理">从零开始的后台管理</a>
+    
+</span>
+		<span>
+    <i class="fa fa-tag"></i>
+    
+        <a href="/tags/java">java</a>
+    
+        <a href="/tags/springboot">springboot</a>
+    
+        <a href="/tags/vue">vue</a>
+    
+</span>
+	</p>
+	
+	  <div class="post-content">
+		<h3 id="本章前提"><a href="#本章前提" class="headerlink" title="本章前提"></a>本章前提</h3><ul>
+<li>了解vue</li>
+<li>了解SpringBoot</li>
+</ul>
+<h3 id="本章内容"><a href="#本章内容" class="headerlink" title="本章内容"></a>本章内容</h3><p><a href="https://github.com/gqiwei/guai_ui/tree/lab-01" target="_blank" rel="noopener">前端代码</a><br><a href="https://github.com/gqiwei/guai/tree/lab-01" target="_blank" rel="noopener">后端代码</a><br>创建后端项目，运行前端项目，以及数据互通。</p>
+<h1 id="创建sringboot项目"><a href="#创建sringboot项目" class="headerlink" title="创建sringboot项目"></a>创建sringboot项目</h1><h2 id="创建流程"><a href="#创建流程" class="headerlink" title="创建流程"></a>创建流程</h2><ol>
+<li>新建项目如下图，点击next。<br><img src="/2020/06/30/boot-guai02/1.png" alt></li>
+<li>Group为包名,Artifact为项目名，填写完成点击next。如下图。<br><img src="/2020/06/30/boot-guai02/2.png" alt></li>
+<li>勾选springWeb模板，点击next。如下图。<br><img src="/2020/06/30/boot-guai02/3.png" alt><br>4.点击finish完成创建。如下图。<br><img src="/2020/06/30/boot-guai02/4.png" alt></li>
+</ol>
+<h2 id="测试一下"><a href="#测试一下" class="headerlink" title="测试一下"></a>测试一下</h2><p>创建一个<code>TestController.java</code>。<br><img src="/2020/06/30/boot-guai02/5.png" alt></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.guai;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/test"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"&#123;code:200&#125;"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>启动springboot,并访问<code>http://localhost:8080/test</code>,最终会出现如下结果：<br><img src="/2020/06/30/boot-guai02/6.png" alt></p>
+<h1 id="前端项目"><a href="#前端项目" class="headerlink" title="前端项目"></a>前端项目</h1><p>前端项目采用的是<a href="https://github.com/PanJiaChen/vue-element-admin" target="_blank" rel="noopener">vue-element-admin</a>。<br>vue-element-admin是有两个版本，一个集成方案，里面有很多功能的样例，另一个是基础模板，只保留了后台的基本功能。<br>集成方案中会有很多用不到的功能，故采用基础模板<a href="https://github.com/PanJiaChen/vue-admin-template" target="_blank" rel="noopener">vue-admin-template</a>，之后后台需要什么功能，只需从vue-element-admin搬过来即可。</p>
+<h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><p>需要提前安装node.js与git。<br>我的node与git版本如下：<br><img src="/2020/06/30/boot-guai02/7.png" alt></p>
+<h2 id="下载vue-admin-template"><a href="#下载vue-admin-template" class="headerlink" title="下载vue-admin-template"></a>下载vue-admin-template</h2><p>在本地项目文件夹里打开GitBash<br><img src="/2020/06/30/boot-guai02/8.png" alt><br>输入<code>git clone git@github.com:PanJiaChen/vue-admin-template.git</code>,将vue-admin-template克隆到本地。  </p>
+<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>输入<code>cd vue-admin-template/</code>进入文件夹。<br>切换分支<code>git checkout permission-control</code>，此分支下是根据用户来生成侧边栏跟router。<br>输入<code>npm install</code>安装依赖。若下载速度过慢，可先输入<code>npm install --registry=https://registry.npm.taobao.org</code>。<br>在安装完依赖之后，输入<code>npm run dev</code>来启动。启动成功会自动弹出页面，如下：<br><img src="/2020/06/30/boot-guai02/9.png" alt></p>
+<h2 id="查看登录相关代码"><a href="#查看登录相关代码" class="headerlink" title="查看登录相关代码"></a>查看登录相关代码</h2><p>登录页面在<code>src/views/loign/index.vue</code>。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.vue 部分代码</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//form表单</span></span><br><span class="line">&lt;el-form ref=<span class="string">"loginForm"</span> :model=<span class="string">"loginForm"</span> :rules=<span class="string">"loginRules"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"login-form"</span> auto-complete=<span class="string">"on"</span> label-position=<span class="string">"left"</span>&gt; <span class="comment">//(1)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//handleLogin</span></span><br><span class="line">handleLogin() &#123;</span><br><span class="line">  <span class="keyword">this</span>.$refs.loginForm.validate(<span class="function"><span class="params">valid</span> =&gt;</span> &#123; <span class="comment">//(2)</span></span><br><span class="line">    <span class="keyword">if</span> (valid) &#123;</span><br><span class="line">      <span class="keyword">this</span>.loading = <span class="literal">true</span></span><br><span class="line">      <span class="keyword">this</span>.$store.dispatch(<span class="string">'user/login'</span>, <span class="keyword">this</span>.loginForm).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.$router.push(&#123; <span class="attr">path</span>: <span class="keyword">this</span>.redirect || <span class="string">'/'</span> &#125;)</span><br><span class="line">        <span class="keyword">this</span>.loading = <span class="literal">false</span></span><br><span class="line">      &#125;).catch(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.loading = <span class="literal">false</span></span><br><span class="line">      &#125;)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'error submit!!'</span>)</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//loginRules</span></span><br><span class="line">loginRules: &#123;</span><br><span class="line">  username: [&#123; <span class="attr">required</span>: <span class="literal">true</span>, <span class="attr">trigger</span>: <span class="string">'blur'</span>, <span class="attr">validator</span>: validateUsername &#125;],<span class="comment">//(3)</span></span><br><span class="line">  password: [&#123; <span class="attr">required</span>: <span class="literal">true</span>, <span class="attr">trigger</span>: <span class="string">'blur'</span>, <span class="attr">validator</span>: validatePassword &#125;]<span class="comment">//(3)</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//validateUsername</span></span><br><span class="line"><span class="keyword">const</span> validateUsername = <span class="function">(<span class="params">rule, value, callback</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (!validUsername(value)) &#123;</span><br><span class="line">    callback(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Please enter the correct user name'</span>))</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    callback()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//validatePassword</span></span><br><span class="line"><span class="keyword">const</span> validatePassword = <span class="function">(<span class="params">rule, value, callback</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (value.length &lt; <span class="number">6</span>) &#123;</span><br><span class="line">    callback(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'The password can not be less than 6 digits'</span>))</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    callback()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>(1) 表单验证规则为<code>loginRules()</code>。<br>(2) 点击登录会进行表单校验，登录接口请求将会写在此处。<br>(3) <code>required: true</code> 表示参数必填，<code>trigger</code>表示在失去焦点触发。<code>validator</code>表示失焦时会去触发的方法。</p>
+<h2 id="更改原有的登录"><a href="#更改原有的登录" class="headerlink" title="更改原有的登录"></a>更改原有的登录</h2><p><code>vue-admin-template</code>中本身的数据交互是用<code>mock</code>，所以要删除<code>mock</code>，更换成我们自己的服务。<br>打开<code>vue.config.js</code>，删除<code>before: require(&#39;./mock/mock-server.js&#39;)</code>，并给<code>devServer</code>添加<code>proxy</code>，<code>proxy</code>是为了解决等下接口访问跨域的问题。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">devServer: &#123;</span><br><span class="line">  port: port,</span><br><span class="line">  open: <span class="literal">true</span>,</span><br><span class="line">  overlay: &#123;</span><br><span class="line">    warnings: <span class="literal">false</span>,</span><br><span class="line">    errors: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  proxy: &#123;</span><br><span class="line">    <span class="string">"/"</span>: &#123;   <span class="comment">//所有请求转发</span></span><br><span class="line">      target:<span class="string">"http://localhost:8080"</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>因为我们目前使用的是dev环境，所以还要修改<code>.env.development</code>中的<code>VUE_APP_BASE_API</code>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VUE_APP_BASE_API = &apos;&apos;</span><br></pre></td></tr></table></figure></p>
+<p>最后修改请求接口名，<code>scr/api/user.js</code>，将url中的<code>/vue-admin-template</code>删除。<br>至此前端部分就修改好了。接下来就要编写下后端接口。<br>在<code>pom.xml</code>添加<code>fastjson</code>的依赖。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>fastjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.13<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>打开<code>TestController.java</code>,添加新的登录接口和获取用户信息接口。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"user/login"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> Map <span class="title">login</span><span class="params">(@RequestBody JSONObject body)</span></span>&#123;</span><br><span class="line">    System.out.println(body.toJSONString());</span><br><span class="line">    Map&lt;String,Object&gt; result = <span class="keyword">new</span> HashMap&lt;String,Object&gt;();</span><br><span class="line">    Map&lt;String,Object&gt; data = <span class="keyword">new</span> HashMap&lt;String,Object&gt;();</span><br><span class="line">    data.put(<span class="string">"token"</span>,<span class="string">"123123123"</span>);<span class="comment">//token 暂时随便写写</span></span><br><span class="line">    result.put(<span class="string">"data"</span>,data);</span><br><span class="line">    result.put(<span class="string">"code"</span>,<span class="number">20000</span>);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"user/info"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> Map <span class="title">info</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Map&lt;String,Object&gt; data = <span class="keyword">new</span> HashMap&lt;String,Object&gt;();</span><br><span class="line">    data.put(<span class="string">"roles"</span>,<span class="string">"admin"</span>);</span><br><span class="line">    data.put(<span class="string">"introduction"</span>,<span class="string">"I am a super administrator"</span>);</span><br><span class="line">    data.put(<span class="string">"avatar"</span>,<span class="string">"https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif"</span>);</span><br><span class="line">    data.put(<span class="string">"name"</span>,<span class="string">"Super Admin"</span>);</span><br><span class="line">    Map&lt;String,Object&gt; result = <span class="keyword">new</span> HashMap&lt;String,Object&gt;();</span><br><span class="line">    result.put(<span class="string">"data"</span>,data);</span><br><span class="line">    result.put(<span class="string">"code"</span>,<span class="number">20000</span>);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>因为当前前端分支会在登录后去获取用户信息，故多加了<code>user/info</code>接口。<br>启动springboot服务与前端服务，进入登录页面点击登录即可成功。<br><img src="/2020/06/30/boot-guai02/10.png" alt="登录页面登录"><br>登录后，后端控制台打印：<br><img src="/2020/06/30/boot-guai02/11.png" alt="后端控制台打印"><br>登录后页面：<br><img src="/2020/06/30/boot-guai02/12.png" alt="登录后页面"></p>
+<h1 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h1><p>此篇章只是运行程序以及打通数据，还是很简单的，下一章就是给后端创建基本的雏形。</p>
+
+	  </div>
+</section>
+
+
+
+
+
+  
+
+				
+
+<div class="footer">
+	<div class="tips">
+        <p><span>Theme <b><a href="http://hexo.io" target="_blank">Guai</a></b></span></p>
+        <p><span>Powered by <b><a href="http://hexo.io" target="_blank">Hexo</a></b></span></p>
+    </div>
+</div>
+			</div>
+		</div>
+	</div>
+
+
+	
+
+<script src="/live2d_models/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2d_models/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2d_models/assets/Bronya.model.json"},"display":{"position":"right","width":290,"height":350},"mobile":{"show":false},"react":{"opacity":0.7},"log":false});</script></body>
+
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  
+  <meta name="description" content>
+  <meta name="keywords" content="’‘">
+  
+  <title>liunx配置jdk，mysql傻瓜式流程 </title>
+  <link rel="Shortcut Icon" href="/icon/guai.ico" type="image/x-icon">
+	  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+	  <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			if(window.innerWidth <= 768){
+				$(".side-container").addClass("fadeInTop");
+			}else{
+				$(".side-container").addClass("fadeInRight");
+			}
+
+			$(".blog-title").click(function() {
+            	$(".blog-title a")[0].click();
+        	});
+		});
+	</script>
+</head>
+
+<body>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3 side-container ">
+				<div class="blog-title">
+    <h1 style class="text_title">
+        <a href="/" class="co">我是小怪</a>
+    </h1>
+    <h3 class="text_subtitle">
+        <a href="/" class="co">人生，只不过是回忆往昔</a>
+    </h3>
+</div>
+
+<div class="blog-nav">
+    <ul>
+        
+            <li>
+                <a href="/">首页</a>
+            </li>
+        
+            <li>
+                <a href="/archives">归档</a>
+            </li>
+        
+            <li>
+                <a href="/tags">标签</a>
+            </li>
+        
+            <li>
+                <a href="/categories">分类</a>
+            </li>
+        
+            <li>
+                <a href="/about">关于</a>
+            </li>
+        
+      
+        <li class="icon">
+            <a href="https://github.com/gqiwei" target="_blank"><i class="fa fa-github">&nbsp;</i></a>
+        </li>
+    </ul>
+    <div class="tips">
+        <p><span>Theme <b><a href="http://hexo.io" target="_blank">Guai</a></b></span></p>
+        <p><span>Powered by <b><a href="http://hexo.io" target="_blank">Hexo</a></b></span></p>
+    </div>
+</div>
+
+
+			</div>
+			<div class="col-sm-9 main-container fadeInTop" >
+				<section class="post">
+	<h1 class="one-title">
+		liunx配置jdk，mysql傻瓜式流程
+	</h1>
+	<p class="post-ps">
+		<span>发布于 2020-01-03</span>
+		<span>修改于 2021-12-02</span>
+		<span>
+    <i class="fa fa-folder"></i>
+    
+        <a href="/categories/笔记">笔记</a>
+    
+</span>
+		<span>
+    <i class="fa fa-tag"></i>
+    
+        <a href="/tags/linux">linux</a>
+    
+</span>
+	</p>
+	
+	  <div class="post-content">
+		<p>两年前的阿里云，里面环境太老了比如python，然后因为不是专门的运维，不会升级，所以把服务器重置，系统选了新的centos，重新配置环境，并记录下。<br>阿里云CentOS 7.7 64位。<br>连接工具xshell，xftp。<a id="more"></a></p>
+<h1 id="配置jdk"><a href="#配置jdk" class="headerlink" title="配置jdk"></a>配置jdk</h1><p>压缩包是自己多年保存下来的，jdk1.8。可以去官网下载。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr</span><br><span class="line">mkdir java</span><br><span class="line">cd java</span><br></pre></td></tr></table></figure></p>
+<p>然后将jdk压缩包用xftp拖上去。<br><img src="https://xiaoguaiblog.oss-cn-shanghai.aliyuncs.com/%E5%B0%8F%E6%80%AA%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/liunx/1.png" alt><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf jdk-8u111-linux-x64.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>配置环境变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br></pre></td></tr></table></figure></p>
+<p>把下面配置添加到文件中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/java/jdk1.8.0_111</span><br><span class="line">export PATH=$JAVA_HOME/bin:$PATH</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://xiaoguaiblog.oss-cn-shanghai.aliyuncs.com/%E5%B0%8F%E6%80%AA%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/liunx/2.png" alt><br>如果忘记vim如何使用，进入<a href="https://www.runoob.com/linux/linux-vim.html" target="_blank" rel="noopener">菜鸟教程</a>重新学习。<br>保存好文件后<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure></p>
+<p>查看java版本<br><img src="https://xiaoguaiblog.oss-cn-shanghai.aliyuncs.com/%E5%B0%8F%E6%80%AA%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/liunx/3.png" alt></p>
+<h1 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h1><p>安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget -i -c http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm</span><br><span class="line">yum -y install mysql57-community-release-el7-10.noarch.rpm</span><br><span class="line">yum -y install mysql-community-server</span><br></pre></td></tr></table></figure></p>
+<p>启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start  mysqld.service</span><br></pre></td></tr></table></figure></p>
+<p>查看运行状态<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status mysqld.service</span><br></pre></td></tr></table></figure></p>
+<p>寻找root用户密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep &quot;password&quot; /var/log/mysqld.log</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://xiaoguaiblog.oss-cn-shanghai.aliyuncs.com/%E5%B0%8F%E6%80%AA%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/liunx/4.png" alt><br>登录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://xiaoguaiblog.oss-cn-shanghai.aliyuncs.com/%E5%B0%8F%E6%80%AA%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/liunx/5.png" alt><br>修改密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER USER &apos;root&apos;@&apos;localhost&apos; IDENTIFIED BY &apos;new password&apos;;</span><br></pre></td></tr></table></figure></p>
+<p>修改密码会提示<code>ERROR 1819 (HY000): Your password does not satisfy the current policy requirements</code>，这是密码设置规范的原因,设置成字母大小写数字加特殊符号。<br>查看密码设置规则<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW VARIABLES LIKE &apos;validate_password%&apos;;</span><br></pre></td></tr></table></figure></p>
+<p>创建授权<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grant all privileges on *.* to &apos;root&apos;@&apos;%&apos; identified by &apos;123456&apos; with grant option;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure></p>
+<p>在阿里云设置了安全组，mysql账号权限也放开后，外部连不上mysql，我这里是直接关闭了防火墙。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#开启端口</span><br><span class="line">firewall-cmd --zone=public --add-port=80/tcp --permanent </span><br><span class="line">#查询端口</span><br><span class="line">firewall-cmd --query-port=80/tcp</span><br><span class="line">#重启防火墙</span><br><span class="line">firewall-cmd --reload</span><br><span class="line">#查看哪些端口是开启的</span><br><span class="line">firewall-cmd --list-port</span><br></pre></td></tr></table></figure>
+	  </div>
+</section>
+
+
+
+
+
+  
+
+				
+
+<div class="footer">
+	<div class="tips">
+        <p><span>Theme <b><a href="http://hexo.io" target="_blank">Guai</a></b></span></p>
+        <p><span>Powered by <b><a href="http://hexo.io" target="_blank">Hexo</a></b></span></p>
+    </div>
+</div>
+			</div>
+		</div>
+	</div>
+
+
+	
+
+<script src="/live2d_models/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2d_models/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2d_models/assets/Bronya.model.json"},"display":{"position":"right","width":290,"height":350},"mobile":{"show":false},"react":{"opacity":0.7},"log":false});</script></body>
+
+</html>

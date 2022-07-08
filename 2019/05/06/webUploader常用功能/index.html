@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  
+  <meta name="description" content>
+  <meta name="keywords" content="’‘">
+  
+  <title>webUploader常用功能 </title>
+  <link rel="Shortcut Icon" href="/icon/guai.ico" type="image/x-icon">
+	  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+	  <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			if(window.innerWidth <= 768){
+				$(".side-container").addClass("fadeInTop");
+			}else{
+				$(".side-container").addClass("fadeInRight");
+			}
+
+			$(".blog-title").click(function() {
+            	$(".blog-title a")[0].click();
+        	});
+		});
+	</script>
+</head>
+
+<body>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3 side-container ">
+				<div class="blog-title">
+    <h1 style class="text_title">
+        <a href="/" class="co">我是小怪</a>
+    </h1>
+    <h3 class="text_subtitle">
+        <a href="/" class="co">人生，只不过是回忆往昔</a>
+    </h3>
+</div>
+
+<div class="blog-nav">
+    <ul>
+        
+            <li>
+                <a href="/">首页</a>
+            </li>
+        
+            <li>
+                <a href="/archives">归档</a>
+            </li>
+        
+            <li>
+                <a href="/tags">标签</a>
+            </li>
+        
+            <li>
+                <a href="/categories">分类</a>
+            </li>
+        
+            <li>
+                <a href="/about">关于</a>
+            </li>
+        
+      
+        <li class="icon">
+            <a href="https://github.com/gqiwei" target="_blank"><i class="fa fa-github">&nbsp;</i></a>
+        </li>
+    </ul>
+    <div class="tips">
+        <p><span>Theme <b><a href="http://hexo.io" target="_blank">Guai</a></b></span></p>
+        <p><span>Powered by <b><a href="http://hexo.io" target="_blank">Hexo</a></b></span></p>
+    </div>
+</div>
+
+
+			</div>
+			<div class="col-sm-9 main-container fadeInTop" >
+				<section class="post">
+	<h1 class="one-title">
+		webUploader常用功能
+	</h1>
+	<p class="post-ps">
+		<span>发布于 2019-05-06</span>
+		<span>修改于 2019-09-26</span>
+		<span>
+    <i class="fa fa-folder"></i>
+    
+        <a href="/categories/笔记">笔记</a>
+    
+</span>
+		<span>
+    <i class="fa fa-tag"></i>
+    
+        <a href="/tags/前端">前端</a>
+    
+        <a href="/tags/WebUploader">WebUploader</a>
+    
+</span>
+	</p>
+	
+	  <div class="post-content">
+		<p>此前工作时，前端的图片上传样式一直有问题，加上前端人员无暇顾及，便在网上寻找一个合适的图片上传插件，最终发现了这款插件WebUploader，并且发现好几个游戏交易网站的图片上传插件也是这个，于是抽空学习记录了下。<br><a id="more"></a></p>
+<h1 id="建一个图片上传"><a href="#建一个图片上传" class="headerlink" title="建一个图片上传"></a>建一个图片上传</h1><pre><code>var uploader=WebUploader.create({
+    auto:false,        //是否开启选择图片后自动上传,true:开启,false:关闭
+    server:&apos;upload.do&apos;,    //上传接口
+    dnd:&apos;#fileList&apos;,        //指定区域可以将图片拖拽进去，多区域用,隔开
+    paste:document.body, //指定区域通过粘贴添加截屏的图片，建议设置为document.body
+    pick:{
+        id:&apos;#filePicker&apos;,        //选取按钮变为选择图片按钮
+        label:&apos;点击选择图片&apos;,    //按钮文字
+        multiple:true        //是否开启多图选择
+    },
+
+    accept:{                            //指定接收哪些类型文件
+        title:&apos;Images&apos;,                    //文字描述
+        extensions:&apos;gif,jpg,jpeg,bmp,png&apos;,    //允许的文件后缀，不带点，用逗号分开
+        mimeTypes:&apos;image/*&apos;            //？？？
+    },
+
+    thumb:{                    //配置生成缩略图的选项
+        width:100,
+        height:100,
+        qualiity:70,            //图片质量，只有type为image/jpeg的时候才有效
+        allowMagnify:false,        //是否允许放大，生成小图不失真请选择false
+        crop:false,            //是否允许裁剪
+        type:&apos;image/jpeg&apos;        //为空的话保留原有图片格式，否则强制转成指定格式
+    },
+
+    compress:{                    //配置压缩图片的选项，如果为false，则上传前不进行压缩
+        width:1600,
+        height:1600,
+        quality:50,                //图片压缩质量，只有type为image/jpeg的时候才有效
+        allowMagnify:false,            //是否允许放大，生成小图不失真请选择false
+        crop:false,                //是否允许裁剪
+        preserveHeaders:true,        //是否保留头部meta信息
+        noCompressIfLarger:false,    //如果压缩后文件比原文件大则使用原图，可能影响图片自动纠正
+        compressSize:0            //单位字节，如果图片大小小于此值，不会采取压缩
+    },
+
+    prepareNextFile:true,    //允许文件上传提前把下一个文件准备好，比如需要图片压缩，md5序列化
+    fileVal:file    ,    //设置文件上传域的name,MultipartFile类型去接收
+
+    method:&apos;POST&apos;,    //文件上传方式：POST或者GET
+
+    fileNumLimit:2,    //限定上传数量
+
+    fileSizeLimit:1024*1024,        //限制总大小 1024*1024=1MB,但是这里设定不准确
+
+    fileSingleSizeLimit:1024,        //限制单个文件大小    1024=1KB
+
+})
+</code></pre><hr>
+<h1 id="WebUpLoader事件"><a href="#WebUpLoader事件" class="headerlink" title="WebUpLoader事件"></a>WebUpLoader事件</h1><p><strong>事件详情访问WebUpLoader API。下面举一个例子</strong><br>uploadStart    在某个文件开始上传前触发，一个文件只触发一次。<br><strong>如何调用</strong></p>
+<pre><code>uploader.onUploadStart=function(file){
+    alert(&quot;开始上传&quot;);
+}
+</code></pre><p><strong>或者</strong></p>
+<pre><code>uploader.on(&apos;uploadStart&apos;,function(file){
+    alert(&quot;开始上传啦&quot;);
+});
+</code></pre><hr>
+<h1 id="获取或者设置配置项（option）"><a href="#获取或者设置配置项（option）" class="headerlink" title="获取或者设置配置项（option）"></a>获取或者设置配置项（option）</h1><pre><code>uploader.option(&apos;thumb&apos;,{    //获取缩略图thumb配置
+    crop:true                //此时缩略图被裁剪        长宽设置貌似有优先级
+});
+</code></pre><hr>
+<h1 id="getStats"><a href="#getStats" class="headerlink" title="getStats"></a>getStats</h1><p><strong>获取文件统计信息。返回信息如下：</strong></p>
+<ul>
+<li>successNum        上传成功的文件数</li>
+<li>progressNum    上传中的文件数</li>
+<li>cancelNum        被删除的文件数</li>
+<li>invalidNum        无效的文件数</li>
+<li>uploadFailNum    上传失败的文件数</li>
+<li>queueNum        还在队列中的文件数</li>
+<li>interruptNum    被暂停的文件数</li>
+</ul>
+<p><strong>例子</strong></p>
+<pre><code>uploader.on(&apos;uploadComplete&apos;,function(file){
+    alert(uploader.getStats().successNum);        //上传完成时弹出上传成功的文件数
+});
+</code></pre><hr>
+<h1 id="addButton"><a href="#addButton" class="headerlink" title="addButton"></a>addButton</h1><p><strong>添加文件选择按钮，如果一个按钮不够，需要调用此方法来添加。参数跟 pick一致</strong></p>
+<pre><code>uploader.addButton({
+    id:&quot;#btn&quot;,
+    innerHtml:&apos;选择文件&apos;
+});
+</code></pre><hr>
+<h1 id="makeThumb"><a href="#makeThumb" class="headerlink" title="makeThumb"></a>makeThumb</h1><p><strong>生成缩略图，此过程为异步，所以需要传入callback。通常情况在图片加入队里后调用此方法来生成预览图。</strong><br>makeThumb(file,callback)<br>makeThumb(file,callback,width,height)<br>callback中可以接收两个参数</p>
+<ul>
+<li>error，如果生成缩略图有错误，此error将为真</li>
+<li>ret，缩略图的Data URL值    在IE6/7中不支持</li>
+</ul>
+<p><strong>例子</strong></p>
+<pre><code>uploader.on(&apos;fileQueued&apos;, function(file) {                //文件添加后触发
+    var $li = $(&apos;&lt;div id=&quot;&apos;+file.id+&apos;&quot;class=&quot;file-item thumbnail&quot;&gt;&apos;
+            + &apos;&lt;img&gt;&apos; + &apos;&lt;div class=&quot;info&quot;&gt;&apos; + file.name + &apos;&lt;/div&gt;&apos;
+            + &apos;&lt;/div&gt;&apos;), $img = $li.find(&apos;img&apos;);
+    $(&quot;#fileList&quot;).append($li);
+
+    uploader.makeThumb(file, function(error, src) {                //生成缩略图
+        if (error) {
+            $(&quot;#fileList&quot;).replaceWith(&apos;&lt;span&gt;不能预览&lt;/span&gt;&apos;);
+            return;
+        }
+        $img.attr(&apos;src&apos;, src);
+    }, 100, 100);
+});
+</code></pre><hr>
+<h1 id="addFiles"><a href="#addFiles" class="headerlink" title="addFiles"></a>addFiles</h1><p><strong>添加文件到队列</strong><br>addFiles(file)<br>addFiles([file1,file2…])</p>
+<hr>
+<h1 id="removeFile"><a href="#removeFile" class="headerlink" title="removeFile"></a>removeFile</h1><p><strong>移除某一文件，默认只会标记文件状态已取消，如果第二个参数为true则会从queue（队列）中移除</strong></p>
+<hr>
+<h1 id="retry"><a href="#retry" class="headerlink" title="retry"></a>retry</h1><p><strong>重试上传，重试指定文件，或者出错的文件重新上传</strong><br>retry()<br>retry(file)</p>
+<hr>
+<h1 id="upload"><a href="#upload" class="headerlink" title="upload"></a>upload</h1><p><strong>开始上传，可以在暂停后调用继续上传</strong><br>upload()<br>upload(file|fileId)</p>
+<hr>
+<h1 id="stop"><a href="#stop" class="headerlink" title="stop"></a>stop</h1><p><strong>暂停上传</strong><br>stop()<br>stop(true)<br>stop(file)</p>
+
+	  </div>
+</section>
+
+
+
+
+
+  
+
+				
+
+<div class="footer">
+	<div class="tips">
+        <p><span>Theme <b><a href="http://hexo.io" target="_blank">Guai</a></b></span></p>
+        <p><span>Powered by <b><a href="http://hexo.io" target="_blank">Hexo</a></b></span></p>
+    </div>
+</div>
+			</div>
+		</div>
+	</div>
+
+
+	
+
+<script src="/live2d_models/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2d_models/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2d_models/assets/Bronya.model.json"},"display":{"position":"right","width":290,"height":350},"mobile":{"show":false},"react":{"opacity":0.7},"log":false});</script></body>
+
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  
+  <meta name="description" content>
+  <meta name="keywords" content="’‘">
+  
+  <title>mybatis源码笔记（一） </title>
+  <link rel="Shortcut Icon" href="/icon/guai.ico" type="image/x-icon">
+	  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+	  <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			if(window.innerWidth <= 768){
+				$(".side-container").addClass("fadeInTop");
+			}else{
+				$(".side-container").addClass("fadeInRight");
+			}
+
+			$(".blog-title").click(function() {
+            	$(".blog-title a")[0].click();
+        	});
+		});
+	</script>
+</head>
+
+<body>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3 side-container ">
+				<div class="blog-title">
+    <h1 style class="text_title">
+        <a href="/" class="co">我是小怪</a>
+    </h1>
+    <h3 class="text_subtitle">
+        <a href="/" class="co">人生，只不过是回忆往昔</a>
+    </h3>
+</div>
+
+<div class="blog-nav">
+    <ul>
+        
+            <li>
+                <a href="/">首页</a>
+            </li>
+        
+            <li>
+                <a href="/archives">归档</a>
+            </li>
+        
+            <li>
+                <a href="/tags">标签</a>
+            </li>
+        
+            <li>
+                <a href="/categories">分类</a>
+            </li>
+        
+            <li>
+                <a href="/about">关于</a>
+            </li>
+        
+      
+        <li class="icon">
+            <a href="https://github.com/gqiwei" target="_blank"><i class="fa fa-github">&nbsp;</i></a>
+        </li>
+    </ul>
+    <div class="tips">
+        <p><span>Theme <b><a href="http://hexo.io" target="_blank">Guai</a></b></span></p>
+        <p><span>Powered by <b><a href="http://hexo.io" target="_blank">Hexo</a></b></span></p>
+    </div>
+</div>
+
+
+			</div>
+			<div class="col-sm-9 main-container fadeInTop" >
+				<section class="post">
+	<h1 class="one-title">
+		mybatis源码笔记（一）
+	</h1>
+	<p class="post-ps">
+		<span>发布于 2020-04-17</span>
+		<span>修改于 2020-04-17</span>
+		<span>
+    <i class="fa fa-folder"></i>
+    
+        <a href="/categories/源码">源码</a>
+    
+</span>
+		<span>
+    <i class="fa fa-tag"></i>
+    
+        <a href="/tags/java">java</a>
+    
+        <a href="/tags/mybatis">mybatis</a>
+    
+</span>
+	</p>
+	
+	  <div class="post-content">
+		<p>mybatis是现在流行的持久层框架，现在这家公司也从之前的ssh项目慢慢转成了ssm项目，而我之前用过ibatis，ibatis正是mybatis的前身。故想找时间来阅读下其源码，但是每天能抽出来的时间有限，只能慢慢的记录下来。<br><a id="more"></a></p>
+<h1 id="源码调试"><a href="#源码调试" class="headerlink" title="源码调试"></a>源码调试</h1><p>mybatis是一个开源的框架，所以我们直接从github上拉取代码，甚至可以fork到自己的仓库里，也方便自己在上面添加注释。<br>我使用IDEA开发工具拉取代码，版本为3.5.3。<br>拉取完成后可以找下<code>org.apache.ibatis.autoconstructor.AutoConstructorTest</code><br><img src="https://xiaoguaiblog.oss-cn-shanghai.aliyuncs.com/%E5%B0%8F%E6%80%AA%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87/mybatis/mybatis01/1.png" alt><br><code>AutoConstructorTest</code>是单元测试类，任意一个单元测试方法都可以直接开始调试。它使用的是HSQLDB。</p>
+<h1 id="开始阅读"><a href="#开始阅读" class="headerlink" title="开始阅读"></a>开始阅读</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@BeforeAll</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">  <span class="comment">// create a SqlSessionFactory</span></span><br><span class="line">  <span class="keyword">try</span> (Reader reader = Resources.getResourceAsReader(<span class="string">"org/apache/ibatis/autoconstructor/mybatis-config.xml"</span>)) &#123;</span><br><span class="line">    sqlSessionFactory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(reader);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// populate in-memory database</span></span><br><span class="line">  BaseDataTest.runScript(sqlSessionFactory.getConfiguration().getEnvironment().getDataSource(),</span><br><span class="line">      <span class="string">"org/apache/ibatis/autoconstructor/CreateDB.sql"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>Resources.getResourceAsReader()</code>是读取xml配置。<br>进入<code>new SqlSessionFactoryBuilder().build()</code>,会发现有很多<code>build()</code>是有很多重载的方法，但最终都会去执行<code>build(Reader reader, String environment, Properties properties)</code>，所以直接看这个好了。<br>在此方法里，会创建一个<code>XMLConfigBuilder</code>，直接点进去看其构造函数。<br>它有很多构造函数，随便挑一个来看。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">XMLConfigBuilder</span><span class="params">(Reader reader, String environment, Properties props)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>(<span class="keyword">new</span> XPathParser(reader, <span class="keyword">true</span>, props, <span class="keyword">new</span> XMLMapperEntityResolver()), environment, props);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里有两个重要的对象，一个是<code>XPathParser</code>和<code>XMLMapperEntityResolver</code>。<br><code>XPathParser</code>是mybatis基于XPath解析器，封装了XPath、Document和EntityResolver，用来解析配置文件mybatis-config.xml以及Mapper.xml，属于mybatis的基础支持层中的解析器模块。<code>XMLMapperEntityResolver</code>是<code>EntityResolver</code>的实现类，核心是<code>resolveEntity()</code>方法，来读取DTD文档。DTD文件主要验证xml文件编写的合法性。<br>查看<code>XPathParser</code>的源码，首先它有很多构造函数，也随便挑一个来看，<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">XPathParser</span><span class="params">(Reader reader, <span class="keyword">boolean</span> validation, Properties variables, EntityResolver entityResolver)</span> </span>&#123;</span><br><span class="line">  commonConstructor(validation, variables, entityResolver);</span><br><span class="line">  <span class="keyword">this</span>.document = createDocument(<span class="keyword">new</span> InputSource(reader));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>commonConstructor()</code>为初始化XPathParser的几个参数。<br><code>createDocument()</code>是将xml解析成Document对象。<br>在调用<code>createDocument()</code>方法前，一定要先调用<code>commonConstructor()</code>。  </p>
+<p>回到XMLConfigBuilder构造函数中来。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="title">XMLConfigBuilder</span><span class="params">(XPathParser parser, String environment, Properties props)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">super</span>(<span class="keyword">new</span> Configuration()); <span class="comment">//创建Configuration对象</span></span><br><span class="line">  ErrorContext.instance().resource(<span class="string">"SQL Mapper Configuration"</span>);</span><br><span class="line">  <span class="keyword">this</span>.configuration.setVariables(props); <span class="comment">//设置Configuration对象的variables属性。</span></span><br><span class="line">  <span class="keyword">this</span>.parsed = <span class="keyword">false</span>;</span><br><span class="line">  <span class="keyword">this</span>.environment = environment;</span><br><span class="line">  <span class="keyword">this</span>.parser = parser;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接下来看看XMLConfigBuilder.parse()方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Configuration <span class="title">parse</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (parsed) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> BuilderException(<span class="string">"Each XMLConfigBuilder can only be used once."</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  parsed = <span class="keyword">true</span>;</span><br><span class="line">  parseConfiguration(parser.evalNode(<span class="string">"/configuration"</span>));</span><br><span class="line">  <span class="keyword">return</span> configuration;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>parsed</code>表示xml是否已经解析过了 。<br><code>parseConfiguration()</code>方法则是解析 XML中的configuration节点。<br>进入<code>parseConfiguration()</code>。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">parseConfiguration</span><span class="params">(XNode root)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">//解析properties标签</span></span><br><span class="line">    propertiesElement(root.evalNode(<span class="string">"properties"</span>));</span><br><span class="line">    <span class="comment">//解析settings标签</span></span><br><span class="line">    Properties settings = settingsAsProperties(root.evalNode(<span class="string">"settings"</span>));</span><br><span class="line">    <span class="comment">//暂且不知道啥作用</span></span><br><span class="line">    loadCustomVfs(settings);</span><br><span class="line">    loadCustomLogImpl(settings);</span><br><span class="line">    <span class="comment">//解析typeAliases标签</span></span><br><span class="line">    typeAliasesElement(root.evalNode(<span class="string">"typeAliases"</span>));</span><br><span class="line">    <span class="comment">//解析plugins标签</span></span><br><span class="line">    pluginElement(root.evalNode(<span class="string">"plugins"</span>));</span><br><span class="line">    <span class="comment">//解析objectFactory标签</span></span><br><span class="line">    objectFactoryElement(root.evalNode(<span class="string">"objectFactory"</span>));</span><br><span class="line">    <span class="comment">//解析objectWrapperFactory标签</span></span><br><span class="line">    objectWrapperFactoryElement(root.evalNode(<span class="string">"objectWrapperFactory"</span>));</span><br><span class="line">    <span class="comment">//解析reflectorFactory标签</span></span><br><span class="line">    reflectorFactoryElement(root.evalNode(<span class="string">"reflectorFactory"</span>));</span><br><span class="line">    settingsElement(settings);</span><br><span class="line">    <span class="comment">//解析environments标签</span></span><br><span class="line">    environmentsElement(root.evalNode(<span class="string">"environments"</span>));</span><br><span class="line">    <span class="comment">//解析databaseIdProvider标签</span></span><br><span class="line">    databaseIdProviderElement(root.evalNode(<span class="string">"databaseIdProvider"</span>));</span><br><span class="line">    <span class="comment">//解析typeHandlers标签</span></span><br><span class="line">    typeHandlerElement(root.evalNode(<span class="string">"typeHandlers"</span>));</span><br><span class="line">    <span class="comment">//解析mappers标签</span></span><br><span class="line">    mapperElement(root.evalNode(<span class="string">"mappers"</span>));</span><br><span class="line">  &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> BuilderException(<span class="string">"Error parsing SQL Mapper Configuration. Cause: "</span> + e, e);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>解析完xml返回Configuration对象。<br>最终<code>SqlSessionFactoryBuilder.bulid()</code>返回<code>SqlSessionFactory</code>对象。<br>至此第一部分代码执行结束，剩下的部分就比较简单了。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">BaseDataTest.runScript(sqlSessionFactory.getConfiguration().getEnvironment().getDataSource(),</span><br><span class="line">      <span class="string">"org/apache/ibatis/autoconstructor/CreateDB.sql"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>从<code>sqlSessionFactory</code>中获取到数据库连接，并执行指定路径下的sql文件，为测试类生成测试数据。</p>
+<p>好了，以上就是是简单的加载mybatis-config文件流程。其中<code>XMLConfigBuilder</code>中还有一些方法，放到后面在看。</p>
+<p><br><br><br>参考文献</p>
+<ul>
+<li>Mybatis技术内幕</li>
+</ul>
+
+	  </div>
+</section>
+
+
+
+
+
+  
+
+				
+
+<div class="footer">
+	<div class="tips">
+        <p><span>Theme <b><a href="http://hexo.io" target="_blank">Guai</a></b></span></p>
+        <p><span>Powered by <b><a href="http://hexo.io" target="_blank">Hexo</a></b></span></p>
+    </div>
+</div>
+			</div>
+		</div>
+	</div>
+
+
+	
+
+<script src="/live2d_models/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2d_models/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2d_models/assets/Bronya.model.json"},"display":{"position":"right","width":290,"height":350},"mobile":{"show":false},"react":{"opacity":0.7},"log":false});</script></body>
+
+</html>

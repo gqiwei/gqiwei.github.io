@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  
+  <meta name="description" content>
+  <meta name="keywords" content="’‘">
+  
+  <title>MongoDB入门 </title>
+  <link rel="Shortcut Icon" href="/icon/guai.ico" type="image/x-icon">
+	  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+	  <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			if(window.innerWidth <= 768){
+				$(".side-container").addClass("fadeInTop");
+			}else{
+				$(".side-container").addClass("fadeInRight");
+			}
+
+			$(".blog-title").click(function() {
+            	$(".blog-title a")[0].click();
+        	});
+		});
+	</script>
+</head>
+
+<body>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3 side-container ">
+				<div class="blog-title">
+    <h1 style class="text_title">
+        <a href="/" class="co">我是小怪</a>
+    </h1>
+    <h3 class="text_subtitle">
+        <a href="/" class="co">人生，只不过是回忆往昔</a>
+    </h3>
+</div>
+
+<div class="blog-nav">
+    <ul>
+        
+            <li>
+                <a href="/">首页</a>
+            </li>
+        
+            <li>
+                <a href="/archives">归档</a>
+            </li>
+        
+            <li>
+                <a href="/tags">标签</a>
+            </li>
+        
+            <li>
+                <a href="/categories">分类</a>
+            </li>
+        
+            <li>
+                <a href="/about">关于</a>
+            </li>
+        
+      
+        <li class="icon">
+            <a href="https://github.com/gqiwei" target="_blank"><i class="fa fa-github">&nbsp;</i></a>
+        </li>
+    </ul>
+    <div class="tips">
+        <p><span>Theme <b><a href="http://hexo.io" target="_blank">Guai</a></b></span></p>
+        <p><span>Powered by <b><a href="http://hexo.io" target="_blank">Hexo</a></b></span></p>
+    </div>
+</div>
+
+
+			</div>
+			<div class="col-sm-9 main-container fadeInTop" >
+				<section class="post">
+	<h1 class="one-title">
+		MongoDB入门
+	</h1>
+	<p class="post-ps">
+		<span>发布于 2021-11-24</span>
+		<span>修改于 2022-02-18</span>
+		<span>
+    <i class="fa fa-folder"></i>
+    
+        <a href="/categories/笔记">笔记</a>
+    
+</span>
+		<span>
+    <i class="fa fa-tag"></i>
+    
+        <a href="/tags/MongoDB">MongoDB</a>
+    
+        <a href="/tags/入门">入门</a>
+    
+</span>
+	</p>
+	
+	  <div class="post-content">
+		<h3 id="系统"><a href="#系统" class="headerlink" title="系统"></a>系统</h3><p>centos7.2</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/yum.repos.d/mongodb-org-3.4.repo</span><br></pre></td></tr></table></figure>
+<p>创建mongodb-org-3.4.repo并输入以下内容。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[mongodb-org-3.4]</span><br><span class="line">name=MongoDB Repository</span><br><span class="line">baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.4/x86_64/</span><br><span class="line">gpgcheck=1</span><br><span class="line">enabled=1</span><br><span class="line">gpgkey=https://www.mongodb.org/static/pgp/server-3.4.asc</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2021/11/24/createMongoDB/2.png" alt><br>保存后退出执行<code>yum install -y mongodb-org</code><br>安装完成后执行<code>vi /etc/mongod.conf</code><br>修改bind_ip为0.0.0.0。<br><img src="/2021/11/24/createMongoDB/3.png" alt><br>启动命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mongod start</span><br></pre></td></tr></table></figure></p>
+<p>停止命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mongod stop</span><br></pre></td></tr></table></figure></p>
+<p>重启命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mongod restart</span><br></pre></td></tr></table></figure></p>
+<p>mongoDB默认数据在<code>/var/lib/mongo</code>，默认日志在<code>/var/log/mongodb/</code><br><img src="/2021/11/24/createMongoDB/4.png" alt></p>
+<h2 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum erase $(rpm -qa | grep mongodb-org)</span><br></pre></td></tr></table></figure>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>输入<code>mongo</code>进入。</p>
+<h3 id="安全认证"><a href="#安全认证" class="headerlink" title="安全认证"></a>安全认证</h3><p><a href="https://blog.csdn.net/skh2015java/article/details/83545712" target="_blank" rel="noopener">权限验证</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 进入mongodb</span><br><span class="line">mongo</span><br><span class="line"></span><br><span class="line"># 切换至 admin 库</span><br><span class="line">use admin;</span><br><span class="line"></span><br><span class="line"># 创建管理员账号</span><br><span class="line">db.createUser(&#123;user:&quot;useradmin&quot;,pwd:&quot;123456&quot;,roles:[&#123;role:&quot;userAdminAnyDatabase&quot;,db:&quot;admin&quot;&#125;]&#125;)</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2021/11/24/createMongoDB/6.png" alt></p>
+<p>执行<code>exit;</code>退出mongoDB。<br>编辑<code>vim /etc/mongod.conf</code><br>加上<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">security:</span><br><span class="line">  authorization: enabled</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2021/11/24/createMongoDB/7.png" alt><br>重启服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mongod restart</span><br></pre></td></tr></table></figure></p>
+<p>重新进入mongo；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mongo</span><br><span class="line">use admin;</span><br><span class="line"># 此时无法查看</span><br><span class="line">show dbs;</span><br><span class="line"></span><br><span class="line">db.auth(&quot;useradmin&quot;,&quot;123456&quot;);</span><br><span class="line">show dbs;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2021/11/24/createMongoDB/8.png" alt></p>
+<h3 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mongo</span><br><span class="line"></span><br><span class="line">use admin;</span><br><span class="line">db.auth(&quot;useradmin&quot;,&quot;123456&quot;);</span><br><span class="line">use newdatabase;</span><br></pre></td></tr></table></figure>
+<p><code>use newdatabase</code> 如果库不存在则创建。<br>接下来创建用户。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.createUser(&#123;user:&quot;test&quot;,pwd:&quot;123456&quot;,roles:[&#123;role:&quot;dbOwner&quot;,db:&quot;newdatabase&quot;&#125;]&#125;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h3><p>工具：Navicat<br><img src="/2021/11/24/createMongoDB/9.png" alt></p>
+
+	  </div>
+</section>
+
+
+
+
+
+  
+
+				
+
+<div class="footer">
+	<div class="tips">
+        <p><span>Theme <b><a href="http://hexo.io" target="_blank">Guai</a></b></span></p>
+        <p><span>Powered by <b><a href="http://hexo.io" target="_blank">Hexo</a></b></span></p>
+    </div>
+</div>
+			</div>
+		</div>
+	</div>
+
+
+	
+
+<script src="/live2d_models/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2d_models/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2d_models/assets/Bronya.model.json"},"display":{"position":"right","width":290,"height":350},"mobile":{"show":false},"react":{"opacity":0.7},"log":false});</script></body>
+
+</html>

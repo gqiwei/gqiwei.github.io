@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  
+  <meta name="description" content>
+  <meta name="keywords" content="’‘">
+  
+  <title>了解java反射机制 </title>
+  <link rel="Shortcut Icon" href="/icon/guai.ico" type="image/x-icon">
+	  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+	  <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			if(window.innerWidth <= 768){
+				$(".side-container").addClass("fadeInTop");
+			}else{
+				$(".side-container").addClass("fadeInRight");
+			}
+
+			$(".blog-title").click(function() {
+            	$(".blog-title a")[0].click();
+        	});
+		});
+	</script>
+</head>
+
+<body>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3 side-container ">
+				<div class="blog-title">
+    <h1 style class="text_title">
+        <a href="/" class="co">我是小怪</a>
+    </h1>
+    <h3 class="text_subtitle">
+        <a href="/" class="co">人生，只不过是回忆往昔</a>
+    </h3>
+</div>
+
+<div class="blog-nav">
+    <ul>
+        
+            <li>
+                <a href="/">首页</a>
+            </li>
+        
+            <li>
+                <a href="/archives">归档</a>
+            </li>
+        
+            <li>
+                <a href="/tags">标签</a>
+            </li>
+        
+            <li>
+                <a href="/categories">分类</a>
+            </li>
+        
+            <li>
+                <a href="/about">关于</a>
+            </li>
+        
+      
+        <li class="icon">
+            <a href="https://github.com/gqiwei" target="_blank"><i class="fa fa-github">&nbsp;</i></a>
+        </li>
+    </ul>
+    <div class="tips">
+        <p><span>Theme <b><a href="http://hexo.io" target="_blank">Guai</a></b></span></p>
+        <p><span>Powered by <b><a href="http://hexo.io" target="_blank">Hexo</a></b></span></p>
+    </div>
+</div>
+
+
+			</div>
+			<div class="col-sm-9 main-container fadeInTop" >
+				<section class="post">
+	<h1 class="one-title">
+		了解java反射机制
+	</h1>
+	<p class="post-ps">
+		<span>发布于 2020-06-22</span>
+		<span>修改于 2020-06-22</span>
+		<span>
+    <i class="fa fa-folder"></i>
+    
+        <a href="/categories/笔记">笔记</a>
+    
+</span>
+		<span>
+    <i class="fa fa-tag"></i>
+    
+        <a href="/tags/java">java</a>
+    
+        <a href="/tags/反射机制">反射机制</a>
+    
+</span>
+	</p>
+	
+	  <div class="post-content">
+		<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>JAVA反射机制是在运行状态中，对于任何一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java的反射机制。</p>
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><h3 id="BookObject类"><a href="#BookObject类" class="headerlink" title="BookObject类"></a>BookObject类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.note;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BookObject</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BookObject</span><span class="params">()</span></span>&#123;</span><br><span class="line">        name=<span class="string">"狂人日记"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">publicMethod</span><span class="params">(String au)</span></span>&#123;</span><br><span class="line">        System.out.println(au);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">privateMethod</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="App类"><a href="#App类" class="headerlink" title="App类"></a>App类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.note;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationTargetException;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> </span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String[] args )</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Class&lt;?&gt; bookClass = Class.forName(<span class="string">"com.note.BookObject"</span>);</span><br><span class="line"><span class="comment">//            Class&lt;?&gt; bookClass = BookObject.class;</span></span><br><span class="line">            BookObject bookObject = (BookObject)bookClass.newInstance(); <span class="comment">//创建实例</span></span><br><span class="line">            bookObject.publicMethod(<span class="string">"public"</span>);</span><br><span class="line"></span><br><span class="line">            Method[] methods = bookClass.getDeclaredMethods();<span class="comment">//获取所有方法</span></span><br><span class="line">            <span class="keyword">for</span>(Method method:methods)&#123;</span><br><span class="line">                System.out.println(method.getName());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            Method publicMethod = bookClass.getDeclaredMethod(<span class="string">"publicMethod"</span>,String.class);<span class="comment">//获取指定方法</span></span><br><span class="line">            publicMethod.invoke(bookObject,<span class="string">"invoke publicMethod"</span>);</span><br><span class="line"></span><br><span class="line">            Field field = bookClass.getDeclaredField(<span class="string">"name"</span>);</span><br><span class="line">            field.setAccessible(<span class="keyword">true</span>);<span class="comment">//关闭安全检查</span></span><br><span class="line">            System.out.println(field.get(bookObject));</span><br><span class="line">            field.set(bookObject,<span class="string">"骆驼祥子"</span>); <span class="comment">//更改值</span></span><br><span class="line"></span><br><span class="line">            Method privateMethod = bookClass.getDeclaredMethod(<span class="string">"privateMethod"</span>);</span><br><span class="line">            privateMethod.setAccessible(<span class="keyword">true</span>);<span class="comment">//关闭安全检查</span></span><br><span class="line">            privateMethod.invoke(bookObject);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InstantiationException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchMethodException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InvocationTargetException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchFieldException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>获取Class的方式</p>
+<ol>
+<li><code>Class.forName(&quot;xx.xx.xx&quot;);</code> xx.xx.xx为完整类名</li>
+<li><code>XXClass.class</code> 类名.class</li>
+<li><code>BookObject book = new BookObject();  book.getClass();</code> 已创建实例对象.getClass();  </li>
+</ol>
+<p>其中最常用的为1跟2。<br><code>getDeclaredMethod()</code> 可以获取指定方法。<br><code>invoke()</code>调用其方法。<br><code>getDeclaredField()</code>获取指定属性。<br>调取私有方法或者属性需要关闭安全检查<code>setAccessible(true)</code>。<br>作为一个业务仔，在平时的开发中几乎用不到反射，但是日常使用的spring框架中大量使用到了反射机制，以及刚接触jdbc的时候，<code>Class.forNmae(&quot;com.mysql.jdbc.Driver&quot;);</code></p>
+<h1 id="Class方法"><a href="#Class方法" class="headerlink" title="Class方法"></a>Class方法</h1><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>asSubclass(Class<t> clazz)</t></td>
+<td>把传递的类的对象转换成代表其子类的对象</td>
+</tr>
+<tr>
+<td>Cast</td>
+<td>把对象转换成代表类或是接口的对象</td>
+</tr>
+<tr>
+<td>getClassLoader()</td>
+<td>获得类的加载器</td>
+</tr>
+<tr>
+<td>getClasses()</td>
+<td>返回一个数组，数组中包含该类中所有公共类和接口类的对象</td>
+</tr>
+<tr>
+<td>getDeclaredClasses()</td>
+<td>返回一个数组，数组中包含该类中所有类和接口类的对象</td>
+</tr>
+<tr>
+<td>forName(String className)</td>
+<td>根据类名返回类的对象</td>
+</tr>
+<tr>
+<td>getName()</td>
+<td>获得类的完整路径名字</td>
+</tr>
+<tr>
+<td>newInstance()</td>
+<td>创建类的实例</td>
+</tr>
+<tr>
+<td>getPackage()</td>
+<td>获得类的包</td>
+</tr>
+<tr>
+<td>getSimpleNanme()</td>
+<td>获得类的名字</td>
+</tr>
+<tr>
+<td>getSuperclass()</td>
+<td>获得当前类继承的父类的名字</td>
+</tr>
+<tr>
+<td>getInterfaces()</td>
+<td>获得当前类实现的类或是接口</td>
+</tr>
+<tr>
+<td>getField(String name)</td>
+<td>获得某个公有的属性对象</td>
+</tr>
+<tr>
+<td>getFields()</td>
+<td>获得所有公有的属性对象</td>
+</tr>
+<tr>
+<td>getDeclaredField(String name)</td>
+<td>获得某个属性对象</td>
+</tr>
+<tr>
+<td>getDeclaredFields()</td>
+<td>获得所有属性对象</td>
+</tr>
+<tr>
+<td>getAnnotation(Class<a> annotationClass)</a></td>
+<td>返回该类中与参数类型匹配的公有注解对象</td>
+</tr>
+<tr>
+<td>getAnnotations()</td>
+<td>返回该类所有的公有注解对象</td>
+</tr>
+<tr>
+<td>getDeclaredAnnotation(Class<a> annotationClass)</a></td>
+<td>返回该类中与参数类型匹配的所有注解对象</td>
+</tr>
+<tr>
+<td>getDeclaredAnnotations()</td>
+<td>返回该类所有的注解对象</td>
+</tr>
+<tr>
+<td>getConstructor(Class…&lt;?&gt; parameterTypes)</td>
+<td>获得该类中与参数类型匹配的公有构造方法</td>
+</tr>
+<tr>
+<td>getConstructors()</td>
+<td>获得该类的所有公有构造方法</td>
+</tr>
+<tr>
+<td>getDeclaredConstructor(Class…&lt;?&gt; parameterTypes)</td>
+<td>获得该类中与参数类型匹配的构造方法</td>
+</tr>
+<tr>
+<td>getDeclaredConstructors()</td>
+<td>获得该类所有构造方法</td>
+</tr>
+<tr>
+<td>getMethod(String name, Class…&lt;?&gt; parameterTypes)</td>
+<td>获得该类某个共有的方法</td>
+</tr>
+<tr>
+<td>getMethods()</td>
+<td>获得该类所有公有的方法</td>
+</tr>
+<tr>
+<td>getDeclaredMethod(String name, Class…&lt;?&gt; parameterTypes)</td>
+<td>获得该类某个方法</td>
+</tr>
+<tr>
+<td>getDeclaredMethods()</td>
+<td>获得该类所有方法</td>
+</tr>
+<tr>
+<td>isAnnotation()</td>
+<td>是否是注解类型，是返回true</td>
+</tr>
+<tr>
+<td>isAnnotationPresent(Class&lt;? extends Annotation&gt; annotationClass)</td>
+<td>是否是指定类型注解类型，是返回true</td>
+</tr>
+<tr>
+<td>isAnonymousClass()</td>
+<td>是否是匿名类</td>
+</tr>
+<tr>
+<td>isArray()</td>
+<td>是否是数组类</td>
+</tr>
+<tr>
+<td>isEnum()</td>
+<td>是否是枚举类</td>
+</tr>
+<tr>
+<td>isInstance(Object obj)</td>
+<td>obj是否是该类的实例</td>
+</tr>
+<tr>
+<td>isInterface()</td>
+<td>是否是接口类</td>
+</tr>
+<tr>
+<td>isLocalClass()</td>
+<td>是否是局部类</td>
+</tr>
+<tr>
+<td>isMemberClass()</td>
+<td>是否是内部类</td>
+</tr>
+</tbody>
+</table>
+
+	  </div>
+</section>
+
+
+
+
+
+  
+
+				
+
+<div class="footer">
+	<div class="tips">
+        <p><span>Theme <b><a href="http://hexo.io" target="_blank">Guai</a></b></span></p>
+        <p><span>Powered by <b><a href="http://hexo.io" target="_blank">Hexo</a></b></span></p>
+    </div>
+</div>
+			</div>
+		</div>
+	</div>
+
+
+	
+
+<script src="/live2d_models/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2d_models/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2d_models/assets/Bronya.model.json"},"display":{"position":"right","width":290,"height":350},"mobile":{"show":false},"react":{"opacity":0.7},"log":false});</script></body>
+
+</html>

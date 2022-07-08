@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  
+  <meta name="description" content="从零开始搭建后台管理系统">
+  <meta name="keywords" content="’‘">
+  
+  <title>从零开始的后台管理系统计划 </title>
+  <link rel="Shortcut Icon" href="/icon/guai.ico" type="image/x-icon">
+	  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+	  <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			if(window.innerWidth <= 768){
+				$(".side-container").addClass("fadeInTop");
+			}else{
+				$(".side-container").addClass("fadeInRight");
+			}
+
+			$(".blog-title").click(function() {
+            	$(".blog-title a")[0].click();
+        	});
+		});
+	</script>
+</head>
+
+<body>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3 side-container ">
+				<div class="blog-title">
+    <h1 style class="text_title">
+        <a href="/" class="co">我是小怪</a>
+    </h1>
+    <h3 class="text_subtitle">
+        <a href="/" class="co">人生，只不过是回忆往昔</a>
+    </h3>
+</div>
+
+<div class="blog-nav">
+    <ul>
+        
+            <li>
+                <a href="/">首页</a>
+            </li>
+        
+            <li>
+                <a href="/archives">归档</a>
+            </li>
+        
+            <li>
+                <a href="/tags">标签</a>
+            </li>
+        
+            <li>
+                <a href="/categories">分类</a>
+            </li>
+        
+            <li>
+                <a href="/about">关于</a>
+            </li>
+        
+      
+        <li class="icon">
+            <a href="https://github.com/gqiwei" target="_blank"><i class="fa fa-github">&nbsp;</i></a>
+        </li>
+    </ul>
+    <div class="tips">
+        <p><span>Theme <b><a href="http://hexo.io" target="_blank">Guai</a></b></span></p>
+        <p><span>Powered by <b><a href="http://hexo.io" target="_blank">Hexo</a></b></span></p>
+    </div>
+</div>
+
+
+			</div>
+			<div class="col-sm-9 main-container fadeInTop" >
+				<section class="post">
+	<h1 class="one-title">
+		从零开始的后台管理系统计划
+	</h1>
+	<p class="post-ps">
+		<span>发布于 2020-06-22</span>
+		<span>修改于 2020-06-22</span>
+		<span>
+    <i class="fa fa-folder"></i>
+    
+        <a href="/categories/从零开始的后台管理">从零开始的后台管理</a>
+    
+</span>
+		<span>
+    <i class="fa fa-tag"></i>
+    
+        <a href="/tags/java">java</a>
+    
+        <a href="/tags/springboot">springboot</a>
+    
+        <a href="/tags/vue">vue</a>
+    
+</span>
+	</p>
+	
+	  <div class="post-content">
+		<p>从零开始搭建后台管理系统，以总结开发3年累计的知识。</p>
+<h2 id="技术框架"><a href="#技术框架" class="headerlink" title="技术框架"></a>技术框架</h2><h3 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h3><ul>
+<li>vue</li>
+<li>vue-element-admin  </li>
+</ul>
+<p>前端这部分不是真正意义上的从零开始，虽然我也算的上是全栈开发，但还是后端开发比较上手。讲实在，也能把页面给画出来，但花费时间预计会很久，特别是调样式的时候，有时候感觉自己有强迫症。最终还是选择一个别人的框架来套用。<br><a href="https://panjiachen.gitee.io/vue-element-admin-site/zh/" target="_blank" rel="noopener">vue-element-admin</a>这个框架在空余时间也研究过，感觉很不错，对于研究vue的同学是强烈推荐的。</p>
+<h3 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h3><ul>
+<li>SpringBoot</li>
+<li>Shiro/SpringSecurity</li>
+<li>Mybatis</li>
+<li>Redis</li>
+<li>JWT</li>
+<li>Druid</li>
+</ul>
+<p>权限这块，估计会使用Shiro，之前做的管理系统用的就是shiro，比较熟悉。</p>
+<h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><ul>
+<li>用户管理</li>
+<li>菜单管理</li>
+<li>角色管理</li>
+<li>操作日志</li>
+<li>连接池监视</li>
+<li>代码生成</li>
+<li>字典管理</li>
+<li>定时任务</li>
+</ul>
+<h2 id="预期"><a href="#预期" class="headerlink" title="预期"></a>预期</h2><p>按照目前闲余时间，预计2个月左右完成。8月31号为最后期限。功能点预计到时候会增加，目前只想到这些。</p>
+<h2 id="最后闲聊"><a href="#最后闲聊" class="headerlink" title="最后闲聊"></a>最后闲聊</h2><p>工作以来，睡懒觉，看剧，游戏浪费了绝大部分的空余时间。虽然偶尔也会心血来潮的看书，那顶不过持续两三周。接触的人大部分是毕业生，技术就不用说了，也面试过同龄的以及更大的，发现技术都是那个样子，隐隐约约造就了一种骄傲的感觉，但是人外有人，天外有天，当发现别人年纪比我小，技术还超强，自己被狠狠的抽醒了，放下视频，放下游戏，好好的学习。</p>
+
+	  </div>
+</section>
+
+
+
+
+
+  
+
+				
+
+<div class="footer">
+	<div class="tips">
+        <p><span>Theme <b><a href="http://hexo.io" target="_blank">Guai</a></b></span></p>
+        <p><span>Powered by <b><a href="http://hexo.io" target="_blank">Hexo</a></b></span></p>
+    </div>
+</div>
+			</div>
+		</div>
+	</div>
+
+
+	
+
+<script src="/live2d_models/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2d_models/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2d_models/assets/Bronya.model.json"},"display":{"position":"right","width":290,"height":350},"mobile":{"show":false},"react":{"opacity":0.7},"log":false});</script></body>
+
+</html>
