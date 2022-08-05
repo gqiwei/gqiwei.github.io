@@ -4,7 +4,7 @@
 	</h1>
 	<p class="post-ps">
 		<span>发布于 <%- date(page.date, "YYYY-MM-DD") %></span>
-		
+		<span>修改于 <%- date(page.updated, "YYYY-MM-DD") %></span>
 		<%- partial('_partial/tags',{tags:page.categories,icon:"fa-folder",url:"categories"}) %>
 		<%- partial('_partial/tags',{tags:page.tags,icon:"fa-tag",url:"tags"}) %>
 	</p>

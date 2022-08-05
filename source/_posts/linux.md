@@ -85,3 +85,13 @@ flush privileges;
 ```
 systemctl stop firewalld
 ```
+```
+#开启端口
+firewall-cmd --zone=public --add-port=80/tcp --permanent 
+#查询端口
+firewall-cmd --query-port=80/tcp
+#重启防火墙
+firewall-cmd --reload
+#查看哪些端口是开启的
+firewall-cmd --list-port
+```

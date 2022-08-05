@@ -1,5 +1,5 @@
 ---
-title: createMongoDB入门
+title: MongoDB入门
 categories: 笔记
 tags:
   - MongoDB
