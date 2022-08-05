@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  
+  <meta name="description" content>
+  <meta name="keywords" content="’‘">
+  
+  <title>hbase单机配置，使用外部zookeeper，java调用 </title>
+  <link rel="Shortcut Icon" href="/icon/guai.ico" type="image/x-icon">
+	  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+	  <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			if(window.innerWidth <= 768){
+				$(".side-container").addClass("fadeInTop");
+			}else{
+				$(".side-container").addClass("fadeInRight");
+			}
+
+			$(".blog-title").click(function() {
+            	$(".blog-title a")[0].click();
+        	});
+		});
+	</script>
+</head>
+
+<body>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3 side-container ">
+				<div class="blog-title">
+    <h1 style class="text_title">
+        <a href="/" class="co">我是小怪</a>
+    </h1>
+    <h3 class="text_subtitle">
+        <a href="/" class="co">人生，只不过是回忆往昔</a>
+    </h3>
+</div>
+
+<div class="blog-nav">
+    <ul>
+        
+            <li>
+                <a href="/">首页</a>
+            </li>
+        
+            <li>
+                <a href="/archives">归档</a>
+            </li>
+        
+            <li>
+                <a href="/tags">标签</a>
+            </li>
+        
+            <li>
+                <a href="/categories">分类</a>
+            </li>
+        
+            <li>
+                <a href="/about">关于</a>
+            </li>
+        
+      
+        <li class="icon">
+            <a href="https://github.com/gqiwei" target="_blank"><i class="fa fa-github">&nbsp;</i></a>
+        </li>
+    </ul>
+    <div class="tips">
+        <p><span>Theme <b><a href="http://hexo.io" target="_blank">Guai</a></b></span></p>
+        <p><span>Powered by <b><a href="http://hexo.io" target="_blank">Hexo</a></b></span></p>
+    </div>
+</div>
+
+
+			</div>
+			<div class="col-sm-9 main-container fadeInTop" >
+				<section class="post">
+	<h1 class="one-title">
+		hbase单机配置，使用外部zookeeper，java调用
+	</h1>
+	<p class="post-ps">
+		<span>发布于 2022-08-05</span>
+		<span>修改于 2022-08-05</span>
+		<span>
+    <i class="fa fa-folder"></i>
+    
+        <a href="/categories/笔记">笔记</a>
+    
+</span>
+		<span>
+    <i class="fa fa-tag"></i>
+    
+        <a href="/tags/java">java</a>
+    
+        <a href="/tags/hbase">hbase</a>
+    
+        <a href="/tags/zookeeper">zookeeper</a>
+    
+</span>
+	</p>
+	
+	  <div class="post-content">
+		<blockquote>
+<p>本文只是简单记录。<br>标题中说的外部zookeeper，并不是在其他服务器上的zookeeper，是在本机上运行的zookeeper。</p>
+</blockquote>
+<p>需要java环境，之前出过linux配置jdk，这里不需要赘述。<br>目前系统环境是centos7.8。<br>jdk是1.8，zookeeper是3.6.3，hbase是2.4.13</p>
+<h1 id="hbase单机安装配置"><a href="#hbase单机安装配置" class="headerlink" title="hbase单机安装配置"></a>hbase单机安装配置</h1><h2 id="创建基本文件夹"><a href="#创建基本文件夹" class="headerlink" title="创建基本文件夹"></a>创建基本文件夹</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/loacal</span><br><span class="line">mkdir hbase</span><br><span class="line">mkdir zookeeper</span><br><span class="line">cd zookeeper</span><br><span class="line">mkdir data</span><br><span class="line">mkdir log</span><br><span class="line">cd ../hbase</span><br><span class="line">mkdir data</span><br></pre></td></tr></table></figure>
+<h2 id="下载zookeeper"><a href="#下载zookeeper" class="headerlink" title="下载zookeeper"></a>下载zookeeper</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/zookeeper</span><br><span class="line">wget https://dlcdn.apache.org/zookeeper/zookeeper-3.6.3/apache-zookeeper-3.6.3-bin.tar.gz</span><br><span class="line">tar -zxf apache-zookeeper-3.6.3-bin.tar.gz</span><br></pre></td></tr></table></figure>
+<h2 id="修改zookeeper配置"><a href="#修改zookeeper配置" class="headerlink" title="修改zookeeper配置"></a>修改zookeeper配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/zookeeper/apache-zookeeper-3.6.3-bin/conf</span><br><span class="line">cp zoo_sample.cfg zoo.cfg</span><br><span class="line">vim zoo.cfg</span><br></pre></td></tr></table></figure>
+<p>在zoo.cfg中添加修改配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dataDir=/usr/local/zookeeper/data</span><br><span class="line">dataLogDir=/usr/local/zookeeper/log</span><br></pre></td></tr></table></figure></p>
+<h2 id="下载hbase"><a href="#下载hbase" class="headerlink" title="下载hbase"></a>下载hbase</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/hbase</span><br><span class="line">wget https://dlcdn.apache.org/hbase/2.4.13/hbase-2.4.13-bin.tar.gz</span><br><span class="line">tar -zxf hbase-2.4.13-bin.tar.gz</span><br></pre></td></tr></table></figure>
+<h2 id="修改hbase配置"><a href="#修改hbase配置" class="headerlink" title="修改hbase配置"></a>修改hbase配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/hbase/hbase-2.4.13/conf</span><br><span class="line">vim hbase-env.sh</span><br></pre></td></tr></table></figure>
+<p>在hbase-env.sh中添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/local/java/jdk1.8.0_111</span><br><span class="line">export HBASE_MANAGES_ZK=false</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim hbase-site.xml</span><br></pre></td></tr></table></figure>
+<p>在hbase-site.xml中添加修改<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- HBase集群中所有RegionServer共享目录，用来持久化HBase的数据，一般设置的是hdfs的文件目录，如hdfs://namenode.[example.org:9000/hbase](http://example.org:9000/hbase)  --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.rootdir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>file:///usr/local/hbase/data<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">   <span class="comment">&lt;!-- ZooKeeper的zoo.conf中的配置。 快照的存储位置 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.zookeeper.property.dataDir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>/usr/local/zookeeper/data<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">   <span class="comment">&lt;!-- ZooKeeper端口 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.zookeeper.property.clientPort<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">value</span>&gt;</span>2181<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- ZooKeeper连接机器名或者ip,多个用','号分隔 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.zookeeper.quorum<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">value</span>&gt;</span>master<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- ZooKeeper存储hbase数据的节点名称 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">name</span>&gt;</span>zookeeper.znode.parent<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">value</span>&gt;</span>/hbase<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">   <span class="comment">&lt;!-- 集群的模式，分布式还是单机模式，如果设置成false的话，HBase进程和Zookeeper进程在同一个JVM进程  --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.cluster.distributed<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 本地文件系统tmp目录 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.tmp.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>./tmp<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.unsafe.stream.capability.enforce<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="启动zookeeper"><a href="#启动zookeeper" class="headerlink" title="启动zookeeper"></a>启动zookeeper</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/zookeeper/apache-zookeeper-3.6.3-bin/bin/</span><br><span class="line">./zkServer.sh start</span><br></pre></td></tr></table></figure>
+<p>可使用<code>./zkServer.sh status</code>查看zookeeper状态，也可以使用<code>jps</code>查看进程。</p>
+<h2 id="启动hbase"><a href="#启动hbase" class="headerlink" title="启动hbase"></a>启动hbase</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/hbase/hbase-2.4.13/bin/</span><br><span class="line">./start-hbase.sh</span><br></pre></td></tr></table></figure>
+<p>可使用jps查看进程。<br>使用<code>./hbase shell</code>进入控制台进行hbase操作。</p>
+<h1 id="java连接hbase"><a href="#java连接hbase" class="headerlink" title="java连接hbase"></a>java连接hbase</h1><p>添加maven依赖<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.hbase<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hbase-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>创建<code>HbaseConnect.java</code>文件，并添加以下代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.hadoop.conf.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.HBaseConfiguration;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.client.Admin;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.client.Connection;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.client.ConnectionFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HbaseConnect</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="comment">//1、创建hbase的配置</span></span><br><span class="line">        Configuration configuration = HBaseConfiguration.create();</span><br><span class="line">        configuration = HBaseConfiguration.create();</span><br><span class="line">        configuration.set(<span class="string">"hbase.zookeeper.quorum"</span>,<span class="string">"43.242.200.154"</span>);</span><br><span class="line">        configuration.set(<span class="string">"hbase.zookeeper.property.clientPort"</span>,<span class="string">"2181"</span>);</span><br><span class="line">        configuration.setInt(<span class="string">"hbase.rpc.timeout"</span>,<span class="number">2000</span>);</span><br><span class="line">        configuration.setInt(<span class="string">"hbase.client.operation.timeout"</span>,<span class="number">3000</span>);</span><br><span class="line">        configuration.setInt(<span class="string">"hbase.client.scanner.timeout.period"</span>,<span class="number">6000</span>);</span><br><span class="line">        <span class="comment">//2、创建hbase的连接</span></span><br><span class="line">        Connection connection;</span><br><span class="line"></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                connection = ConnectionFactory.createConnection(configuration);</span><br><span class="line">                System.out.println(connection);</span><br><span class="line">                <span class="comment">//3、创建admin对象</span></span><br><span class="line">                Admin admin = connection.getAdmin();</span><br><span class="line">                System.out.println(admin);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行程序，控制台会打印出以下类似信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hconnection-0x26ceffa8</span><br><span class="line">org.apache.hadoop.hbase.client.HBaseAdmin@512baff6</span><br></pre></td></tr></table></figure></p>
+
+	  </div>
+</section>
+
+
+
+
+
+  
+
+				
+
+<div class="footer">
+	<div class="tips">
+        <p><span>Theme <b><a href="http://hexo.io" target="_blank">Guai</a></b></span></p>
+        <p><span>Powered by <b><a href="http://hexo.io" target="_blank">Hexo</a></b></span></p>
+    </div>
+</div>
+			</div>
+		</div>
+	</div>
+
+
+	
+
+<script src="/live2d_models/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2d_models/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2d_models/assets/Bronya.model.json"},"display":{"position":"right","width":290,"height":350},"mobile":{"show":false},"react":{"opacity":0.7},"log":false});</script></body>
+
+</html>
